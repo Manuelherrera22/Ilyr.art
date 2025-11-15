@@ -100,11 +100,8 @@ export const ProfileProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    console.log('[ProfileContext] useEffect triggered, user:', user ? 'exists' : 'null');
-    
     // Si no hay usuario, resolvemos inmediatamente
     if (!user) {
-      console.log('[ProfileContext] No user, setting loading to false immediately');
       setProfile(null);
       setLoading(false);
       return;
@@ -114,20 +111,19 @@ export const ProfileProvider = ({ children }) => {
 
     if (user && session && !accessTracked) {
       const trackUserAccess = async () => {
-        console.log('[AccessTracker] Iniciando seguimiento de acceso de usuario...');
         try {
-          console.log('[AccessTracker] Invocando función "log-user-access"...');
           await supabase.functions.invoke('log-user-access', {
             headers: {
               Authorization: `Bearer ${session.access_token}`,
             },
             body: { usuario_id: user.id, email: user.email },
           });
-          console.log('[AccessTracker] Función "log-user-access" invocada exitosamente.');
           setAccessTracked(true);
         } catch (error) {
-          console.error('[AccessTracker] Error rastreando el acceso del usuario:', error.message);
-          if(error.context) console.error('[AccessTracker] Detalles del error:', error.context);
+          // Silently fail - access tracking is not critical
+          if (process.env.NODE_ENV === 'development') {
+            console.error('[AccessTracker] Error rastreando el acceso del usuario:', error.message);
+          }
         }
       };
       trackUserAccess();

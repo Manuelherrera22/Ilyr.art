@@ -28,14 +28,9 @@ const AppRoutes = () => {
   const { loading: authLoading } = useAuth();
   const { loadingProfile } = useProfile();
 
-  console.log('[AppRoutes] authLoading:', authLoading, 'loadingProfile:', loadingProfile);
-
   if (authLoading || loadingProfile) {
-    console.log('[AppRoutes] Showing loading spinner');
     return <LoadingSpinner fullScreen />;
   }
-
-  console.log('[AppRoutes] Rendering routes');
 
   return (
     <Suspense fallback={<LoadingSpinner fullScreen />}>

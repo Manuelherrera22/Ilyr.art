@@ -12,11 +12,9 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   const handleSession = useCallback(async (session) => {
-    console.log('[AuthContext] handleSession called, session:', session ? 'exists' : 'null');
     setSession(session);
     setUser(session?.user ?? null);
     setLoading(false);
-    console.log('[AuthContext] Loading set to false');
   }, []);
 
   useEffect(() => {
