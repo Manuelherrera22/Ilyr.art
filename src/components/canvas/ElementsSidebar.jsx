@@ -13,8 +13,8 @@ const ElementsSidebar = () => {
   };
 
   return (
-    <aside className="w-72 flex-shrink-0 bg-[#0B0D12]/80 backdrop-blur-xl border-r border-white/10 rounded-lg p-4 flex flex-col">
-      <h2 className="text-xl font-bold text-white mb-4">Elementos IA</h2>
+    <aside className="w-full lg:w-64 xl:w-72 flex-shrink-0 bg-[#0B0D12]/80 backdrop-blur-xl border-r border-white/10 rounded-lg p-3 sm:p-4 flex flex-col max-h-full overflow-hidden">
+      <h2 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4">Elementos IA</h2>
       <Tabs defaultValue="text" className="flex-1 flex flex-col">
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="text"><Type /></TabsTrigger>

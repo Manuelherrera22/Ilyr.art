@@ -204,7 +204,7 @@ const DIYDashboardPage = ({ setHeaderStep }) => {
         onConfirm={handleGenerateWithPrompt}
       />
       <div className="w-full max-w-6xl mx-auto">
-        <div className="bg-background/30 backdrop-blur-lg p-8 rounded-2xl shadow-2xl border border-white/10 min-h-[500px] flex flex-col relative">
+        <div className="bg-background/30 backdrop-blur-lg p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl shadow-2xl border border-white/10 min-h-[400px] sm:min-h-[500px] flex flex-col relative">
           {isLoadingIdea && (
             <div className="absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-10 rounded-2xl">
               <div className="text-white flex items-center gap-2">
@@ -243,14 +243,14 @@ const DIYDashboardPage = ({ setHeaderStep }) => {
             />
           </div>
           {showFooter && (
-            <div className="flex justify-between items-center mt-12 pt-6 border-t border-white/10">
-              <Button variant="outline" onClick={handleBack} disabled={currentStep === 0 || isSubmitting || isDiscarding}>
+            <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 sm:gap-0 mt-6 sm:mt-8 md:mt-12 pt-4 sm:pt-5 md:pt-6 border-t border-white/10">
+              <Button variant="outline" onClick={handleBack} disabled={currentStep === 0 || isSubmitting || isDiscarding} className="w-full sm:w-auto text-sm sm:text-base">
                 {isDiscarding && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                {currentStep === 1 ? 'Descartar y Volver' : 'Atrás'}
+                <span className="whitespace-nowrap">{currentStep === 1 ? 'Descartar y Volver' : 'Atrás'}</span>
               </Button>
-              <Button onClick={handleNext} disabled={isSubmitting || isLoadingIdea || (currentStep === 1 && !previewData?.imagen_generada)} className="bg-gradient-to-r from-[#FF3CAC] to-[#784BA0] min-w-[140px]">
+              <Button onClick={handleNext} disabled={isSubmitting || isLoadingIdea || (currentStep === 1 && !previewData?.imagen_generada)} className="bg-gradient-to-r from-[#FF3CAC] to-[#784BA0] min-w-[140px] w-full sm:w-auto text-sm sm:text-base">
                 {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                {isSubmitting ? 'Procesando...' : (currentStep === 0 ? 'Analizar y Continuar' : (currentStep === 1 ? 'Crear video con esta versión' : (currentStep === steps.length - 1 ? 'Finalizar' : 'Siguiente')))}
+                <span className="whitespace-nowrap">{isSubmitting ? 'Procesando...' : (currentStep === 0 ? 'Analizar y Continuar' : (currentStep === 1 ? 'Crear video con esta versión' : (currentStep === steps.length - 1 ? 'Finalizar' : 'Siguiente')))}</span>
               </Button>
             </div>
           )}

@@ -30,15 +30,15 @@ const PropertiesSidebar = ({ element, updateElement }) => {
 
   if (!element) {
     return (
-      <aside className="w-72 flex-shrink-0 bg-[#0B0D12]/80 backdrop-blur-xl border-l border-white/10 rounded-lg p-4 flex items-center justify-center">
-        <p className="text-white/60 text-center">Selecciona un elemento para editar sus propiedades.</p>
+      <aside className="w-full lg:w-64 xl:w-72 flex-shrink-0 bg-[#0B0D12]/80 backdrop-blur-xl border-l border-white/10 rounded-lg p-3 sm:p-4 flex items-center justify-center max-h-full overflow-hidden">
+        <p className="text-white/60 text-center text-sm sm:text-base px-2">Selecciona un elemento para editar sus propiedades.</p>
       </aside>
     );
   }
 
   return (
-    <aside className="w-72 flex-shrink-0 bg-[#0B0D12]/80 backdrop-blur-xl border-l border-white/10 rounded-lg p-4 flex flex-col space-y-4 custom-scrollbar overflow-y-auto">
-        <h2 className="text-xl font-bold text-white">Propiedades</h2>
+    <aside className="w-full lg:w-64 xl:w-72 flex-shrink-0 bg-[#0B0D12]/80 backdrop-blur-xl border-l border-white/10 rounded-lg p-3 sm:p-4 flex flex-col space-y-3 sm:space-y-4 custom-scrollbar overflow-y-auto max-h-full">
+        <h2 className="text-lg sm:text-xl font-bold text-white">Propiedades</h2>
         
         {element.type === 'text' && (
             <>

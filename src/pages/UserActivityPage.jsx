@@ -82,16 +82,16 @@ const UserActivityPage = ({ setHeaderStep }) => {
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto">
+    <div className="w-full max-w-6xl mx-auto px-2 sm:px-4">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="mb-8 flex justify-between items-center"
+        className="mb-6 sm:mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
       >
-        <div>
-          <h1 className="text-4xl font-bold text-white">Mi Actividad</h1>
-          <p className="text-white/60 mt-2">Aquí puedes ver tu historial de acceso a la plataforma.</p>
+        <div className="flex-1 min-w-0">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">Mi Actividad</h1>
+          <p className="text-white/60 mt-2 text-sm sm:text-base">Aquí puedes ver tu historial de acceso a la plataforma.</p>
         </div>
         <Popover>
           <PopoverTrigger asChild>
@@ -99,7 +99,7 @@ const UserActivityPage = ({ setHeaderStep }) => {
               id="date"
               variant={'outline'}
               className={cn(
-                'w-[300px] justify-start text-left font-normal glass-card',
+                'w-full sm:w-[280px] md:w-[300px] justify-start text-left font-normal glass-card text-xs sm:text-sm',
                 !date && 'text-muted-foreground'
               )}
             >
@@ -125,7 +125,8 @@ const UserActivityPage = ({ setHeaderStep }) => {
               defaultMonth={date?.from}
               selected={date}
               onSelect={setDate}
-              numberOfMonths={2}
+              numberOfMonths={1}
+              className="sm:number-of-months-2"
               locale={es}
             />
           </PopoverContent>
@@ -161,11 +162,11 @@ const UserActivityPage = ({ setHeaderStep }) => {
           {logs.map((log) => (
             <motion.div key={log.id} variants={itemVariants}>
               <Card className="glass-card">
-                <CardContent className="p-4 flex justify-between items-center">
-                  <p className="text-white/80">
+                <CardContent className="p-3 sm:p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-0">
+                  <p className="text-white/80 text-sm sm:text-base">
                     Acceso detectado desde <span className="font-semibold text-white">{log.email}</span>
                   </p>
-                  <p className="text-sm text-white/60">
+                  <p className="text-xs sm:text-sm text-white/60">
                     {format(new Date(log.fecha_acceso), "eeee, dd 'de' MMMM, yyyy 'a las' HH:mm", { locale: es })}
                   </p>
                 </CardContent>

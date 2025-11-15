@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { LayoutGrid, User, LifeBuoy, LogOut, ChevronsLeft, Zap, ArrowLeftRight, BrainCircuit, Sparkles, Film, Lightbulb, History } from 'lucide-react';
+import { LayoutGrid, User, LifeBuoy, LogOut, ChevronsLeft, Zap, ArrowLeftRight, BrainCircuit, Sparkles, Film, Lightbulb, History, X } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
 import { useProfile } from '@/contexts/ProfileContext';
@@ -46,12 +46,22 @@ const DashboardSidebar = ({ isCollapsed, toggleSidebar }) => {
   };
 
   return (
-    <motion.aside 
-      initial={false}
-      animate={{ width: isCollapsed ? '5rem' : '16rem' }}
-      transition={{ duration: 0.3, ease: 'easeInOut' }}
-      className="bg-[#0B0D12]/90 backdrop-blur-xl flex-shrink-0 flex flex-col border-r border-white/10 relative shadow-2xl hidden lg:flex"
-    >
+    <>
+      {/* Mobile Menu Overlay */}
+      {!isSidebarCollapsed && (
+        <div 
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
+          onClick={toggleSidebar}
+        />
+      )}
+
+      {/* Desktop Sidebar */}
+      <motion.aside 
+        initial={false}
+        animate={{ width: isCollapsed ? '5rem' : '16rem' }}
+        transition={{ duration: 0.3, ease: 'easeInOut' }}
+        className="bg-[#0B0D12]/90 backdrop-blur-xl flex-shrink-0 flex flex-col border-r border-white/10 relative shadow-2xl hidden lg:flex"
+      >
       <div className={`flex items-center p-4 h-[89px] border-b border-white/10 ${isCollapsed ? 'justify-center' : 'justify-between'}`}>
         {!isCollapsed && (
           <Link to="/dashboard" className="flex items-center space-x-2">
@@ -118,6 +128,79 @@ const DashboardSidebar = ({ isCollapsed, toggleSidebar }) => {
         </div>
       </div>
     </motion.aside>
+
+      {/* Mobile Sidebar */}
+      <motion.aside
+        initial={false}
+        animate={{ x: isMobileMenuOpen ? 0 : '-100%' }}
+        transition={{ duration: 0.3, ease: 'easeInOut' }}
+        className="fixed inset-y-0 left-0 w-64 bg-[#0B0D12]/95 backdrop-blur-xl flex flex-col border-r border-white/10 z-50 lg:hidden"
+      >
+        <div className="flex items-center justify-between p-4 h-[65px] border-b border-white/10">
+          <Link to="/dashboard" className="flex items-center space-x-2" onClick={toggleSidebar}>
+            <div className="w-8 h-8 bg-gradient-to-br from-[#FF3CAC] to-[#784BA0] rounded-lg flex items-center justify-center shadow-lg">
+              <Zap className="w-5 h-5 text-white" />
+            </div>
+            <span className="text-xl font-bold bg-gradient-to-r from-[#FF3CAC] to-[#784BA0] bg-clip-text text-transparent">ILYR.art</span>
+          </Link>
+          <Button variant="ghost" size="icon" onClick={toggleSidebar} className="text-white/70 hover:text-white hover:bg-white/10">
+            <X className="h-5 w-5" />
+          </Button>
+        </div>
+        <nav className="flex-grow mt-6 px-2 overflow-y-auto">
+          <ul className="space-y-1">
+            {menuItems.map(item => (
+              <li key={item.name}>
+                <Button 
+                  variant={location.pathname === item.path ? "secondary" : "ghost"}
+                  onClick={() => {
+                    handleMenuClick(item);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className={`w-full text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300 justify-start group ${location.pathname === item.path ? 'bg-white/10 text-white' : ''}`}
+                >
+                  <item.icon className={`h-5 w-5 mr-3 ${location.pathname === item.path ? 'text-[#FF3CAC]' : 'group-hover:text-[#FF3CAC]'} transition-colors`} /> 
+                  <span className={`${location.pathname === item.path ? 'text-white' : 'group-hover:text-[#FF3CAC]'} transition-colors`}>{item.name}</span>
+                </Button>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <div className="mt-auto px-2 pb-4">
+          <ul className="space-y-1">
+            <li>
+              <Button variant="ghost" onClick={() => { navigate('/dashboard'); toggleSidebar(); }} className="w-full text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300 justify-start group">
+                <ArrowLeftRight className="h-5 w-5 mr-3 group-hover:text-[#FF3CAC] transition-colors" /> Cambiar Flujo
+              </Button>
+            </li>
+            {accountItems.map(item => (
+              <li key={item.name}>
+                <Button 
+                  variant={location.pathname === item.path ? "secondary" : "ghost"}
+                  onClick={() => {
+                    handleMenuClick(item);
+                    toggleSidebar();
+                  }}
+                  className={`w-full text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300 justify-start group ${location.pathname === item.path ? 'bg-white/10 text-white' : ''}`}
+                >
+                  <item.icon className={`h-5 w-5 mr-3 ${location.pathname === item.path ? 'text-[#FF3CAC]' : 'group-hover:text-[#FF3CAC]'} transition-colors`} /> 
+                  <span className={`${location.pathname === item.path ? 'text-white' : 'group-hover:text-[#FF3CAC]'} transition-colors`}>{item.name}</span>
+                </Button>
+              </li>
+            ))}
+            <li>
+              <Button variant="ghost" onClick={signOut} className="w-full text-red-400 hover:text-red-300 hover:bg-red-500/20 transition-all duration-300 justify-start group">
+                <LogOut className="h-5 w-5 mr-3" /> Cerrar Sesión
+              </Button>
+            </li>
+          </ul>
+          <div className="p-2 mt-4 border-t border-white/20">
+            <p className="text-sm font-semibold text-white truncate">{profile?.full_name || user?.email}</p>
+            <p className="text-xs text-white/60 capitalize">{profile?.profile_type || 'Usuario'}</p>
+          </div>
+        </div>
+      </motion.aside>
+    </>
   );
 };
 

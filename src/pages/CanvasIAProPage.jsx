@@ -95,21 +95,21 @@ const CanvasIAProPage = ({ setHeaderStep }) => {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="w-full h-full flex flex-col">
-        <div className="flex items-center justify-between mb-4">
-          <div className="text-center flex-1">
-            <h1 className="text-2xl font-bold text-white">Canvas IA Pro</h1>
-            <p className="text-white/60">Hazlo tuyo: Personaliza tu video con precisión, estilo y asistencia inteligente.</p>
+      <div className="w-full h-full flex flex-col min-h-0">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 mb-4">
+          <div className="text-center sm:text-left flex-1 min-w-0">
+            <h1 className="text-xl sm:text-2xl font-bold text-white">Canvas IA Pro</h1>
+            <p className="text-sm sm:text-base text-white/60 mt-1">Hazlo tuyo: Personaliza tu video con precisión, estilo y asistencia inteligente.</p>
           </div>
-          <div className="flex gap-2">
-            <Button variant="outline" onClick={goBackToDIY}>
+          <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+            <Button variant="outline" onClick={goBackToDIY} className="w-full sm:w-auto text-sm sm:text-base">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Volver al Flujo
             </Button>
             <Button 
               onClick={continueToExport}
               disabled={elements.length === 0}
-              className="bg-gradient-to-r from-[#FF3CAC] to-[#784BA0] hover:from-[#FF3CAC]/90 hover:to-[#784BA0]/90"
+              className="bg-gradient-to-r from-[#FF3CAC] to-[#784BA0] hover:from-[#FF3CAC]/90 hover:to-[#784BA0]/90 w-full sm:w-auto text-sm sm:text-base"
             >
               <Save className="w-4 h-4 mr-2" />
               Guardar y Continuar
@@ -117,10 +117,10 @@ const CanvasIAProPage = ({ setHeaderStep }) => {
           </div>
         </div>
         
-        <div className="flex-1 flex overflow-hidden gap-4">
+        <div className="flex-1 flex flex-col lg:flex-row overflow-hidden gap-3 sm:gap-4 min-h-0">
           <ElementsSidebar />
           
-          <div className="flex-1 flex flex-col gap-4">
+          <div className="flex-1 flex flex-col gap-3 sm:gap-4 min-h-0 overflow-hidden">
             <CanvasEditor 
               elements={elements} 
               updateElement={updateElement} 

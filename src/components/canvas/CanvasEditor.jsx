@@ -37,10 +37,10 @@ const CanvasEditor = ({ elements, updateElement, addElement, selectedElement, on
       onClick={() => onSelectElement(null)}
     >
       <div className="absolute inset-0 flex items-center justify-center -z-10">
-        <div className="text-center text-white/20">
-            <Video className="w-24 h-24 mx-auto mb-4" />
-            <p className="text-2xl font-semibold">Tu video se previsualizará aquí</p>
-            <p className="text-lg">Arrastra elementos para empezar a diseñar</p>
+        <div className="text-center text-white/20 px-4">
+            <Video className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 mx-auto mb-3 sm:mb-4" />
+            <p className="text-lg sm:text-xl md:text-2xl font-semibold">Tu video se previsualizará aquí</p>
+            <p className="text-sm sm:text-base md:text-lg">Arrastra elementos para empezar a diseñar</p>
         </div>
       </div>
 

@@ -85,21 +85,21 @@ const InspirationFeedPage = ({ setHeaderStep }) => {
   };
 
   return (
-    <div className="w-full">
-      <div className="flex items-center justify-between mb-12">
+    <div className="w-full px-2 sm:px-4">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-0 mb-8 sm:mb-10 md:mb-12">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center flex-1"
+          className="text-center sm:text-left flex-1"
         >
-          <h1 className="text-4xl font-bold text-white">Feed de Inspiración</h1>
-          <p className="text-lg text-white/70 mt-2">Descubre lo que otros creadores están haciendo en ILYR.art</p>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">Feed de Inspiración</h1>
+          <p className="text-base sm:text-lg text-white/70 mt-2">Descubre lo que otros creadores están haciendo en ILYR.art</p>
         </motion.div>
         {!setHeaderStep && (
           <Button 
             onClick={() => navigate('/portal')}
             variant="outline"
-            className="border-white/20 text-white hover:bg-white/10"
+            className="border-white/20 text-white hover:bg-white/10 w-full sm:w-auto text-sm sm:text-base"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Volver al Portal
@@ -110,11 +110,11 @@ const InspirationFeedPage = ({ setHeaderStep }) => {
       {loading ? (
         <LoadingSpinner />
       ) : creations.length === 0 ? (
-        <div className="text-center text-white/60 py-20">
-          <p>Aún no hay creaciones públicas. ¡Sé el primero en compartir!</p>
+        <div className="text-center text-white/60 py-12 sm:py-16 md:py-20 px-4">
+          <p className="text-sm sm:text-base">Aún no hay creaciones públicas. ¡Sé el primero en compartir!</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
           {creations.map((creation, index) => (
             <CreationCard key={creation.id} creation={creation} index={index} />
           ))}

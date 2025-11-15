@@ -20,14 +20,14 @@ const IdeaCreationStep = ({
   backgroundImage,
 }) => {
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-8">
-      <div className="text-center">
-        <h2 className="text-3xl font-bold text-white">Combina tus Elementos con IA</h2>
-        <p className="text-white/60 mt-2">Sube tus imágenes clave y describe cómo quieres que interactúen. La IA creará una escena coherente y cinematográfica.</p>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6 sm:space-y-8">
+      <div className="text-center px-2">
+        <h2 className="text-2xl sm:text-3xl font-bold text-white">Combina tus Elementos con IA</h2>
+        <p className="text-white/60 mt-2 text-sm sm:text-base">Sube tus imágenes clave y describe cómo quieres que interactúen. La IA creará una escena coherente y cinematográfica.</p>
       </div>
       
-      <div className="max-w-5xl mx-auto space-y-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+      <div className="max-w-5xl mx-auto space-y-6 sm:space-y-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 items-start">
           <div className="space-y-2">
             <h3 className="text-lg font-semibold text-white/90 text-center">Imagen Principal</h3>
             <ImageUploadPreview

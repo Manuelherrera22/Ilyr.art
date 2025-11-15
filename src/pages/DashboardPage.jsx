@@ -13,7 +13,7 @@ import { useAuth } from '@/contexts/SupabaseAuthContext';
 import { supabase } from '@/lib/customSupabaseClient';
 
 const DashboardPage = () => {
-  const [isSidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [isSidebarCollapsed, setSidebarCollapsed] = useState(true); // Iniciar colapsado en móvil
   const [headerStepName, setHeaderStepName] = useState('');
   const [headerStepIndex, setHeaderStepIndex] = useState(0);
   const [headerTotalSteps, setHeaderTotalSteps] = useState(0);
@@ -46,16 +46,16 @@ const DashboardPage = () => {
   }
 
   return (
-    <div className="flex h-screen bg-[#0B0D12]">
+    <div className="flex h-screen bg-[#0B0D12] overflow-hidden">
       <DashboardSidebar isCollapsed={isSidebarCollapsed} toggleSidebar={toggleSidebar} />
-      <div className="flex-1 flex flex-col overflow-hidden">
+      <div className="flex-1 flex flex-col overflow-hidden min-w-0">
         <DashboardHeader 
           toggleSidebar={toggleSidebar} 
           currentStepName={headerStepName}
           currentStepIndex={headerStepIndex}
           totalSteps={headerTotalSteps}
         />
-        <main className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 bg-pattern custom-scrollbar">
+        <main className="flex-1 overflow-y-auto p-3 sm:p-4 md:p-6 lg:p-8 bg-pattern custom-scrollbar">
           <Routes>
             <Route path="diy" element={<DIYDashboardPage setHeaderStep={setHeaderStep} />} />
             <Route path="professional" element={<ProfessionalDashboardPage setHeaderStep={setHeaderStep} />} />

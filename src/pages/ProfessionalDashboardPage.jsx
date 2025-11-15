@@ -75,18 +75,18 @@ const ProfessionalDashboardPage = ({ setHeaderStep }) => {
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto">
+    <div className="w-full max-w-6xl mx-auto px-2 sm:px-4">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="mb-8"
+        className="mb-6 sm:mb-8"
       >
-        <h1 className="text-4xl font-bold text-white flex items-center">
-          <Lightbulb className="mr-4 text-primary h-10 w-10" />
-          Gestor de Ideas Visuales
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+          <Lightbulb className="text-primary h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 flex-shrink-0" />
+          <span>Gestor de Ideas Visuales</span>
         </h1>
-        <p className="text-white/60 mt-2">Aquí puedes ver, editar y gestionar las ideas que has subido en el Flujo DIY.</p>
+        <p className="text-white/60 mt-2 text-sm sm:text-base">Aquí puedes ver, editar y gestionar las ideas que has subido en el Flujo DIY.</p>
       </motion.div>
 
       <div>
@@ -109,7 +109,7 @@ const ProfessionalDashboardPage = ({ setHeaderStep }) => {
           </div>
         ) : (
           <motion.div
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
@@ -118,20 +118,20 @@ const ProfessionalDashboardPage = ({ setHeaderStep }) => {
               {ideas.map(idea => (
                 <motion.div key={idea.id} variants={itemVariants} layout exit={{ opacity: 0, scale: 0.8 }}>
                   <Card className="glass-card h-full flex flex-col overflow-hidden">
-                    <CardHeader className="flex-row items-center justify-between p-4">
-                       <p className="text-xs text-white/50">ID: {idea.id.substring(0,8)}...</p>
-                       <div className="flex items-center space-x-1">
-                          <Button asChild variant="ghost" size="icon" className="text-primary hover:bg-primary/20 hover:text-primary-focus flex-shrink-0">
+                    <CardHeader className="flex-row items-center justify-between p-3 sm:p-4 gap-2">
+                       <p className="text-[10px] sm:text-xs text-white/50 truncate">ID: {idea.id.substring(0,8)}...</p>
+                       <div className="flex items-center space-x-1 flex-shrink-0">
+                          <Button asChild variant="ghost" size="icon" className="text-primary hover:bg-primary/20 hover:text-primary-focus flex-shrink-0 h-7 w-7 sm:h-8 sm:w-8">
                             <Link to={`/dashboard/diy?ideaId=${idea.id}`}>
-                              <Edit className="h-4 w-4" />
+                              <Edit className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                             </Link>
                           </Button>
-                          <Button variant="ghost" size="icon" className="text-red-400 hover:bg-red-500/20 hover:text-red-300 flex-shrink-0" onClick={() => handleDeleteIdea(idea.id)}>
-                            <Trash2 className="h-4 w-4" />
+                          <Button variant="ghost" size="icon" className="text-red-400 hover:bg-red-500/20 hover:text-red-300 flex-shrink-0 h-7 w-7 sm:h-8 sm:w-8" onClick={() => handleDeleteIdea(idea.id)}>
+                            <Trash2 className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                           </Button>
                        </div>
                     </CardHeader>
-                    <CardContent className="p-4 pt-0 flex-grow grid grid-cols-2 gap-4">
+                    <CardContent className="p-3 sm:p-4 pt-0 flex-grow grid grid-cols-2 gap-3 sm:gap-4">
                       <div className="space-y-2">
                         <p className="text-sm font-bold text-white/80">Producto</p>
                         <div className="aspect-square bg-black/20 rounded-lg flex items-center justify-center">
