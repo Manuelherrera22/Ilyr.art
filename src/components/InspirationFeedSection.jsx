@@ -25,36 +25,36 @@ const InspirationFeedSection = () => {
   };
 
   return (
-    <section id="inspiration-feed" className="py-20 sm:py-32 bg-background/70">
-      <div className="container mx-auto px-4">
+    <section id="inspiration-feed" className="py-12 sm:py-16 md:py-20 lg:py-32 bg-background/70">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.7 }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 md:mb-14 lg:mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 text-foreground px-2">
             {t('home.inspirationFeedTitle')}
           </h2>
-          <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg text-foreground/70 max-w-3xl mx-auto px-4">
             {t('home.inspirationFeedSubtitle')}
           </p>
         </motion.div>
 
-        <div className="relative h-[400px] flex items-center justify-center overflow-visible">
+        <div className="relative h-[300px] sm:h-[350px] md:h-[400px] flex items-center justify-center overflow-visible px-4">
           <motion.div
             variants={cardVariants}
             initial="offscreen"
             whileInView="onscreen"
             viewport={{ once: true, amount: 0.5 }}
             whileHover={{ 
-              scale: 1.15, 
-              rotate: -8,
+              scale: 1.1, 
+              rotate: -6,
               zIndex: 20,
               transition: { duration: 0.3 }
             }}
-            className="absolute w-64 h-80 bg-card rounded-2xl shadow-2xl transform -rotate-12 -translate-x-32 cursor-pointer group overflow-hidden"
+            className="absolute w-48 h-60 sm:w-56 sm:h-72 md:w-64 md:h-80 bg-card rounded-xl sm:rounded-2xl shadow-2xl transform -rotate-12 -translate-x-16 sm:-translate-x-24 md:-translate-x-32 cursor-pointer group overflow-hidden hidden sm:block"
           >
             <div className="relative w-full h-full">
               <motion.img 
@@ -84,11 +84,11 @@ const InspirationFeedSection = () => {
             whileInView="onscreen"
             viewport={{ once: true, amount: 0.5, delay: 0.2 }}
             whileHover={{ 
-              scale: 1.2, 
+              scale: 1.15, 
               zIndex: 30,
               transition: { duration: 0.3 }
             }}
-            className="absolute w-72 h-96 bg-card rounded-2xl shadow-2xl z-10 cursor-pointer group overflow-hidden"
+            className="absolute w-56 h-72 sm:w-64 sm:h-80 md:w-72 md:h-96 bg-card rounded-xl sm:rounded-2xl shadow-2xl z-10 cursor-pointer group overflow-hidden"
           >
             <div className="relative w-full h-full">
               <motion.img 
@@ -118,12 +118,12 @@ const InspirationFeedSection = () => {
             whileInView="onscreen"
             viewport={{ once: true, amount: 0.5, delay: 0.4 }}
             whileHover={{ 
-              scale: 1.15, 
-              rotate: 8,
+              scale: 1.1, 
+              rotate: 6,
               zIndex: 20,
               transition: { duration: 0.3 }
             }}
-            className="absolute w-64 h-80 bg-card rounded-2xl shadow-2xl transform rotate-12 translate-x-32 cursor-pointer group overflow-hidden"
+            className="absolute w-48 h-60 sm:w-56 sm:h-72 md:w-64 md:h-80 bg-card rounded-xl sm:rounded-2xl shadow-2xl transform rotate-12 translate-x-16 sm:translate-x-24 md:translate-x-32 cursor-pointer group overflow-hidden hidden sm:block"
           >
             <div className="relative w-full h-full">
               <motion.img 
@@ -154,13 +154,13 @@ const InspirationFeedSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.7, delay: 0.5 }}
-          className="text-center mt-16"
+          className="text-center mt-10 sm:mt-12 md:mt-14 lg:mt-16"
         >
-          <Button asChild size="lg" className="bg-gradient-to-r from-primary to-secondary text-primary-foreground px-10 py-7 text-lg font-bold pulse-glow">
-            <Link to="/portal">
-              <Sparkles className="w-6 h-6 mr-3" />
+          <Button asChild size="lg" className="bg-gradient-to-r from-primary to-secondary text-primary-foreground px-6 sm:px-8 md:px-10 py-5 sm:py-6 md:py-7 text-base sm:text-lg font-bold pulse-glow w-full sm:w-auto">
+            <Link to="/portal" className="flex items-center justify-center">
+              <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3" />
               {t('home.inspirationFeedButton')}
-              <ArrowRight className="w-5 h-5 ml-3" />
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2 sm:ml-3" />
             </Link>
           </Button>
         </motion.div>

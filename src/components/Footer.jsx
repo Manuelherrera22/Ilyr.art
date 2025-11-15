@@ -68,8 +68,8 @@ const Footer = () => {
       role="contentinfo"
       aria-label="Pie de página de ILYR.art"
     >
-      <div className="container mx-auto px-6 py-[5px]">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-8">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 py-[5px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 md:gap-12 mb-6 sm:mb-7 md:mb-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -81,14 +81,14 @@ const Footer = () => {
               <img 
                 src="/logo-ilyr-art.svg" 
                 alt="ILYR.art Logo" 
-                className="h-8 w-auto"
+                className="h-6 sm:h-7 md:h-8 w-auto"
                 width="120"
                 height="32"
                 loading="lazy"
               />
             </div>
             <p 
-              className="text-foreground/90 text-lg leading-relaxed" 
+              className="text-foreground/90 text-sm sm:text-base md:text-lg leading-relaxed" 
               dangerouslySetInnerHTML={{ __html: t('footer.tagline') }}
               aria-label={t('footer.tagline').replace(/<[^>]*>/g, '')}
             />
@@ -102,7 +102,7 @@ const Footer = () => {
             className="space-y-5"
             aria-label={t('footer.quickLinks')}
           >
-            <h3 className="text-xl font-semibold text-foreground tracking-wide">{t('footer.quickLinks')}</h3>
+            <h3 className="text-lg sm:text-xl font-semibold text-foreground tracking-wide">{t('footer.quickLinks')}</h3>
             <ul className="space-y-2.5" role="list">
               {quickLinks.map((link) => (
                 <li key={link.name} role="listitem">
@@ -115,7 +115,7 @@ const Footer = () => {
                       <motion.span
                         whileHover={{ x: 5, color: 'hsl(var(--accent))', textShadow: '0 0 5px hsl(var(--accent))' }}
                         whileTap={{ scale: 0.95 }}
-                        className="text-secondary-type hover:text-foreground transition-all duration-200 text-sm cursor-pointer inline-block"
+                        className="text-secondary-type hover:text-foreground transition-all duration-200 text-xs sm:text-sm cursor-pointer inline-block"
                       >
                         {link.name}
                       </motion.span>
@@ -125,7 +125,7 @@ const Footer = () => {
                       whileHover={{ x: 5, color: 'hsl(var(--accent))', textShadow: '0 0 5px hsl(var(--accent))' }}
                       whileTap={{ scale: 0.95 }}
                       onClick={() => link.sectionId ? scrollToSection(link.sectionId) : link.action?.()}
-                      className="text-secondary-type hover:text-foreground transition-all duration-200 text-sm focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background rounded"
+                      className="text-secondary-type hover:text-foreground transition-all duration-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background rounded"
                       aria-label={`Desplazarse a ${link.name}`}
                     >
                       {link.name}
@@ -144,7 +144,7 @@ const Footer = () => {
             className="space-y-5"
             aria-label={t('footer.legalAndPrivacy')}
           >
-            <h3 className="text-xl font-semibold text-foreground tracking-wide">{t('footer.legalAndPrivacy')}</h3>
+            <h3 className="text-lg sm:text-xl font-semibold text-foreground tracking-wide">{t('footer.legalAndPrivacy')}</h3>
             <ul className="space-y-2.5" role="list">
               {legalLinks.map((link) => (
                 <li key={link.name} role="listitem">
@@ -156,7 +156,7 @@ const Footer = () => {
                     <motion.div
                       whileHover={{ x: 5, color: 'hsl(var(--accent))', textShadow: '0 0 5px hsl(var(--accent))' }}
                       whileTap={{ scale: 0.95 }}
-                      className="flex items-center text-secondary-type hover:text-foreground transition-all duration-200 text-sm"
+                      className="flex items-center text-secondary-type hover:text-foreground transition-all duration-200 text-xs sm:text-sm"
                     >
                       <link.icon className="w-4 h-4 mr-2" aria-hidden="true" />
                       {link.name}
@@ -172,7 +172,7 @@ const Footer = () => {
                   key={contact.name}
                   whileHover={{ x: 5, color: 'hsl(var(--accent))' }}
                   onClick={() => handleEmailContact(contact.email, `Inquiry: ${contact.name}`)}
-                  className="flex items-center text-secondary-type hover:text-foreground transition-all duration-200 text-xs mb-1 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background rounded"
+                  className="flex items-center text-secondary-type hover:text-foreground transition-all duration-200 text-xs mb-1 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background rounded text-[10px] sm:text-xs"
                   aria-label={`Contactar por ${contact.name} a ${contact.email}`}
                 >
                   <contact.icon className="w-3 h-3 mr-2" aria-hidden="true" />
@@ -189,7 +189,7 @@ const Footer = () => {
             viewport={{ once: true }}
             className="space-y-5"
           >
-            <h3 className="text-xl font-semibold text-foreground tracking-wide">{t('footer.socialMedia')}</h3>
+            <h3 className="text-lg sm:text-xl font-semibold text-foreground tracking-wide">{t('footer.socialMedia')}</h3>
             <div className="flex flex-wrap gap-3" role="list" aria-label="Enlaces a redes sociales">
               {socialLinks.map((social) => (
                 <motion.a
@@ -224,24 +224,24 @@ const Footer = () => {
           </motion.div>
         </div>
 
-        <div className="section-divider my-4"></div>
+        <div className="section-divider my-3 sm:my-4"></div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
           viewport={{ once: true }}
-          className="text-center space-y-2"
+          className="text-center space-y-1.5 sm:space-y-2 px-4"
         >
-          <p className="text-secondary-type text-sm">
+          <p className="text-secondary-type text-xs sm:text-sm">
             {t('footer.copyright', { year: new Date().getFullYear() })}
           </p>
-          <p className="text-muted-foreground text-xs flex items-center justify-center">
-            <Sparkles className="w-3 h-3 text-accent mr-1.5" />
-            {t('footer.holding')} <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent mx-1">ILYR.AI</span>
-            <Sparkles className="w-3 h-3 text-accent ml-1.5" />
+          <p className="text-muted-foreground text-[10px] sm:text-xs flex flex-wrap items-center justify-center gap-1">
+            <Sparkles className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-accent" />
+            {t('footer.holding')} <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent mx-0.5 sm:mx-1">ILYR.AI</span>
+            <Sparkles className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-accent" />
           </p>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-[10px] sm:text-xs text-muted-foreground">
             {t('footer.securityStandards')}
           </p>
         </motion.div>

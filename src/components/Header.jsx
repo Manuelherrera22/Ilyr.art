@@ -87,8 +87,8 @@ const Header = () => {
       role="banner"
       aria-label="Navegación principal"
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-[var(--header-height)]">
+      <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-[var(--header-height)] min-h-[50px]">
           <Link 
             to="/" 
             className="flex items-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background rounded py-[5px]"
@@ -97,7 +97,7 @@ const Header = () => {
             <img 
               src="/logo-ilyr-art.svg" 
               alt="ILYR.art Logo" 
-              className="h-[calc(var(--header-height)-10px)] w-auto max-h-[55px]"
+              className="h-8 sm:h-10 md:h-[calc(var(--header-height)-10px)] w-auto max-h-[55px]"
               loading="eager"
               width="120"
               height="55"
@@ -105,14 +105,14 @@ const Header = () => {
           </Link>
 
           <nav 
-            className="hidden lg:flex items-center space-x-1"
+            className="hidden md:flex items-center space-x-1"
             role="navigation"
             aria-label="Navegación principal"
           >
             {renderNavLinks()}
           </nav>
 
-          <div className="hidden lg:flex items-center space-x-3">
+          <div className="hidden md:flex items-center space-x-2 lg:space-x-3">
             <LanguageSwitcher isScrolled={isScrolled} isMenuOpen={isMenuOpen} />
             {user ? (
               <>
@@ -143,17 +143,17 @@ const Header = () => {
             )}
           </div>
 
-          <div className="lg:hidden">
+          <div className="md:hidden">
             <Button 
               variant="ghost" 
               size="icon" 
               onClick={() => setIsMenuOpen(!isMenuOpen)} 
-              className="text-foreground hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background"
+              className="text-foreground hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background h-9 w-9"
               aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
               aria-expanded={isMenuOpen}
               aria-controls="mobile-menu"
             >
-              {isMenuOpen ? <X className="h-6 w-6" aria-hidden="true" /> : <Menu className="h-6 w-6" aria-hidden="true" />}
+              {isMenuOpen ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
             </Button>
           </div>
         </div>
@@ -164,7 +164,7 @@ const Header = () => {
           initial={{ opacity: 0, height: 0 }} 
           animate={{ opacity: 1, height: 'auto' }} 
           exit={{ opacity: 0, height: 0 }} 
-          className="lg:hidden bg-gradient-to-r from-primary/70 via-secondary/70 to-accent/70 backdrop-blur-md rounded-b-[var(--radius)]"
+          className="md:hidden bg-gradient-to-r from-primary/70 via-secondary/70 to-accent/70 backdrop-blur-md rounded-b-[var(--radius)]"
           id="mobile-menu"
           role="navigation"
           aria-label="Menú de navegación móvil"

@@ -53,30 +53,30 @@ const HowItWorksSection = () => {
   return (
     <section 
       id="how-it-works" 
-      className="py-20 sm:py-32 bg-background"
+      className="py-12 sm:py-16 md:py-20 lg:py-32 bg-background"
       aria-labelledby="how-it-works-title"
     >
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8">
         <motion.header
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.7 }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 md:mb-14 lg:mb-16"
         >
           <h2 
             id="how-it-works-title"
-            className="text-4xl md:text-5xl font-bold mb-4 text-foreground"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 text-foreground px-2"
           >
             {t('home.howItWorksTitle')}
           </h2>
-          <p className="text-lg text-foreground/70">
+          <p className="text-base sm:text-lg text-foreground/70 px-4">
             {t('home.howItWorksSubtitle')}
           </p>
         </motion.header>
 
         <motion.ol
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 list-none"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 md:gap-8 list-none"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -92,21 +92,21 @@ const HowItWorksSection = () => {
               aria-label={`Paso ${index + 1}: ${step.title}`}
             >
               <Card className="h-full text-center bg-card/50 border-primary/10 hover:border-primary/30 hover:shadow-primary/10 transition-all duration-300 transform hover:-translate-y-2 focus-within:ring-2 focus-within:ring-accent focus-within:ring-offset-2">
-                <CardHeader>
+                <CardHeader className="p-4 sm:p-6">
                   <div 
-                    className="mx-auto w-20 h-20 mb-4 flex items-center justify-center rounded-full bg-gradient-to-br from-primary to-secondary text-primary-foreground shadow-lg"
+                    className="mx-auto w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 mb-3 sm:mb-4 flex items-center justify-center rounded-full bg-gradient-to-br from-primary to-secondary text-primary-foreground shadow-lg"
                     role="img"
                     aria-label={`Icono del paso ${index + 1}`}
                   >
-                    {step.icon}
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10">{step.icon}</div>
                   </div>
-                  <CardTitle className="text-xl font-bold text-foreground">
+                  <CardTitle className="text-lg sm:text-xl font-bold text-foreground">
                     <span className="sr-only">Paso {index + 1}: </span>
                     {step.title}
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <p className="text-foreground/70">{step.description}</p>
+                <CardContent className="p-4 sm:p-6 pt-0">
+                  <p className="text-sm sm:text-base text-foreground/70">{step.description}</p>
                 </CardContent>
               </Card>
             </motion.li>

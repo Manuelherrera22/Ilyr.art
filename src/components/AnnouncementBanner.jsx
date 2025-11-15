@@ -71,38 +71,38 @@ const AnnouncementBanner = () => {
             aria-describedby="announcement-description"
           >
             <div 
-              className="bg-gradient-to-r from-primary via-secondary to-accent text-primary-foreground rounded-[var(--radius)] p-8 max-w-md w-full shadow-2xl border-2 border-primary-foreground/20 relative"
+              className="bg-gradient-to-r from-primary via-secondary to-accent text-primary-foreground rounded-[var(--radius)] p-6 sm:p-7 md:p-8 max-w-md w-full mx-4 shadow-2xl border-2 border-primary-foreground/20 relative"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Botón de cerrar (opcional, pero mejor UX) */}
               <button
                 onClick={handleAccept}
-                className="absolute top-4 right-4 text-primary-foreground/80 hover:text-primary-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2 focus:ring-offset-primary rounded"
+                className="absolute top-3 right-3 sm:top-4 sm:right-4 text-primary-foreground/80 hover:text-primary-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2 focus:ring-offset-primary rounded"
                 aria-label="Cerrar popup"
               >
-                <X className="w-5 h-5" />
+                <X className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
 
               {/* Contenido */}
-              <div className="text-center space-y-6">
+              <div className="text-center space-y-4 sm:space-y-5 md:space-y-6">
                 <h3 
                   id="announcement-title"
-                  className="font-bold text-2xl md:text-3xl"
+                  className="font-bold text-xl sm:text-2xl md:text-3xl px-2"
                 >
                   ¡ILYR.art evoluciona!
                 </h3>
                 
                 <p 
                   id="announcement-description"
-                  className="text-base md:text-lg opacity-95 leading-relaxed"
+                  className="text-sm sm:text-base md:text-lg opacity-95 leading-relaxed px-2"
                 >
                   Para una experiencia más profesional, hemos separado la zona pública de las herramientas creativas. ¡Inicia sesión para explorar tu dashboard!
                 </p>
                 
-                <div className="pt-4">
+                <div className="pt-2 sm:pt-3 md:pt-4">
                   <Button
                     onClick={handleAccept}
-                    className="bg-white text-black hover:bg-white/90 font-semibold px-8 py-6 text-base md:text-lg rounded-[var(--radius)] shadow-lg transition-all duration-300 hover:scale-105"
+                    className="bg-white text-black hover:bg-white/90 font-semibold px-6 sm:px-7 md:px-8 py-4 sm:py-5 md:py-6 text-sm sm:text-base md:text-lg rounded-[var(--radius)] shadow-lg transition-all duration-300 hover:scale-105 w-full sm:w-auto"
                     aria-label="Continuar"
                   >
                     CONTINUAR

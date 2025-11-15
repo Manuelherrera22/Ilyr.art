@@ -41,25 +41,25 @@ const GamificationSection = () => {
   };
 
   return (
-    <section id="gamification" className="py-20 sm:py-32 bg-background">
-      <div className="container mx-auto px-4">
+    <section id="gamification" className="py-12 sm:py-16 md:py-20 lg:py-32 bg-background">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.7 }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 md:mb-14 lg:mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 text-foreground px-2">
             {t('home.gamificationTitle')}
           </h2>
-          <p className="text-lg text-foreground/70">
+          <p className="text-base sm:text-lg text-foreground/70 px-4">
             {t('home.gamificationSubtitle')}
           </p>
         </motion.div>
 
         <motion.div
-          className="flex justify-center items-center gap-8 sm:gap-16"
+          className="flex flex-col sm:flex-row justify-center items-center gap-6 sm:gap-8 md:gap-12 lg:gap-16"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -71,10 +71,10 @@ const GamificationSection = () => {
               className="flex flex-col items-center text-center"
               variants={itemVariants}
             >
-              <div className="w-24 h-24 mb-4 flex items-center justify-center rounded-full bg-gradient-to-br from-accent/80 to-orange-400/80 text-accent-foreground shadow-lg transform transition-transform duration-300 hover:scale-110">
-                {badge.icon}
+              <div className="w-20 h-20 sm:w-22 sm:h-22 md:w-24 md:h-24 mb-3 sm:mb-4 flex items-center justify-center rounded-full bg-gradient-to-br from-accent/80 to-orange-400/80 text-accent-foreground shadow-lg transform transition-transform duration-300 hover:scale-110">
+                <div className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12">{badge.icon}</div>
               </div>
-              <p className="font-semibold text-foreground">{badge.label}</p>
+              <p className="font-semibold text-foreground text-sm sm:text-base">{badge.label}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -84,12 +84,12 @@ const GamificationSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.7, delay: 0.5 }}
-          className="text-center mt-16"
+          className="text-center mt-10 sm:mt-12 md:mt-14 lg:mt-16"
         >
-          <Button asChild size="lg" variant="outline" className="border-primary/50 text-primary hover:bg-primary/10 px-10 py-7 text-lg font-bold">
-            <Link to={isLoggedIn ? "/portal" : "/login"}>
+          <Button asChild size="lg" variant="outline" className="border-primary/50 text-primary hover:bg-primary/10 px-6 sm:px-8 md:px-10 py-4 sm:py-5 md:py-6 lg:py-7 text-base sm:text-lg font-bold w-full sm:w-auto">
+            <Link to={isLoggedIn ? "/portal" : "/login"} className="flex items-center justify-center">
               {t('home.gamificationButton')}
-              <ArrowRight className="w-5 h-5 ml-3" />
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2 sm:ml-3" />
             </Link>
           </Button>
         </motion.div>
