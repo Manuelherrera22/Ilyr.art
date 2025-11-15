@@ -59,7 +59,6 @@ export const ProfileProvider = ({ children }) => {
           setProfile(data);
         } else {
           // Si no hay data ni error, creamos perfil por defecto
-          console.log('No profile found, creating default profile...');
           const { error: insertError } = await supabase
             .from('profiles')
             .insert([
@@ -71,7 +70,9 @@ export const ProfileProvider = ({ children }) => {
             ]);
 
           if (insertError) {
-            console.error('Error creating profile:', insertError);
+            if (process.env.NODE_ENV === 'development') {
+              console.error('Error creating profile:', insertError);
+            }
             setProfile({
               full_name: user.email?.split('@')[0] || 'Usuario',
               profile_type: 'client'
@@ -84,7 +85,9 @@ export const ProfileProvider = ({ children }) => {
           }
         }
       } catch (error) {
-        console.error('Error in fetchProfile:', error);
+        if (process.env.NODE_ENV === 'development') {
+          console.error('Error in fetchProfile:', error);
+        }
         // En caso de error, establecemos un perfil mínimo para que la app no se quede colgada
         setProfile({
           full_name: user?.email?.split('@')[0] || 'Usuario',
