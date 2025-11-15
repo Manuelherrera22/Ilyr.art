@@ -8,7 +8,14 @@ const ScrollProgress = () => {
     const updateScrollProgress = () => {
       const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scrolled = window.scrollY;
-      const progress = (scrolled / windowHeight) * 100;
+      
+      // Prevenir división por cero o valores inválidos
+      if (windowHeight <= 0) {
+        setScrollProgress(0);
+        return;
+      }
+      
+      const progress = Math.min(100, Math.max(0, (scrolled / windowHeight) * 100));
       setScrollProgress(progress);
     };
 
