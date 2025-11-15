@@ -1,0 +1,240 @@
+{
+  "header": {
+    "howItWorks": "How It Works",
+    "aiAnalysis": "AI Analysis",
+    "aiModules": "AI Modules",
+    "plans": "Plans",
+    "faq": "FAQ",
+    "login": "Login",
+    "createAccount": "Join Waitlist",
+    "dashboard": "Client Portal",
+    "logout": "Logout"
+  },
+  "footer": {
+    "tagline": "Visualize. <span class='text-accent'>Connect.</span> Transform.",
+    "quickLinks": "Quick Links",
+    "legalAndPrivacy": "Legal & Privacy",
+    "socialMedia": "Social Media",
+    "compliance": "Compliance",
+    "legalContact": "Legal Contact",
+    "copyright": "© {{year}} ILYR.art – All rights reserved.",
+    "holding": "Part of the creative holding",
+    "securityStandards": "We operate under strict standards of digital security and international regulatory compliance",
+    "nav": {
+      "home": "Home",
+      "demo": "AI Demo",
+      "pricing": "Pricing",
+      "login": "Login"
+    },
+    "legal": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Use",
+      "notice": "Legal Notice",
+      "cookies": "Cookie Management",
+      "contact": "Legal Contact",
+      "deleteAccount": "Delete Account"
+    },
+    "toast": {
+      "featureDev": "🚧 Feature in development",
+      "featureDevDesc": "The link to {{feature}} is being prepared. Come back soon! 🚀",
+      "sectionNotFound": "🚧 Section not found",
+      "sectionNotFoundDesc": "We couldn't find the {{sectionId}} section. We're looking into it!"
+    }
+  },
+  "waitlist": {
+    "title": "Join the Waitlist",
+    "description": "Be the first to know when ILYR.art launches. Join the visual revolution.",
+    "placeholder": "your@email.com",
+    "button": "Join Now",
+    "successTitle": "✅ You're on the list!",
+    "successDescription": "We'll notify you as soon as we launch. Get ready!",
+    "errorTitle": "❌ Oops! Something went wrong.",
+    "errorExists": "This email is already on our waitlist.",
+    "errorInvalid": "Please enter a valid email address.",
+    "backToHome": "Back to Home",
+    "haveAccount": "Already have an account?",
+    "login": "Login here"
+  },
+  "login": {
+    "title": "Login",
+    "description": "Access your creative dashboard.",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "forgotPassword": "Forgot your password?",
+    "button": "Login",
+    "loading": "Logging in...",
+    "noAccount": "Don't have an account yet?",
+    "joinWaitlist": "Join the waitlist now",
+    "successTitle": "✅ Welcome back!",
+    "successDescription": "Redirecting to your dashboard...",
+    "errorTitle": "❌ Login Error",
+    "backToHome": "Back to Home"
+  },
+  "authModal": {
+    "loginTitle": "Login",
+    "loginDescription": "Access your creative dashboard and continue transforming ideas into visual reality.",
+    "switchToRegisterDisabled": "Registration is currently closed. Join our waitlist!",
+    "haveAccount": "Already have an account? Login"
+  },
+  "home": {
+    "heroTitle": "Bring Your Vision. <span class='gradient-text'>Co-create it</span> with Our Expert Studio.",
+    "heroSubtitle": "At ILYR.art, AI acceleration meets a senior VFX, CGI, and design collective to craft cinematic visuals tailored to your brand.",
+    "heroExploreButton": "Start My Brief",
+    "heroUploadButton": "Book Discovery Call",
+    "heroSubtext": "We stay by your side from the first spark to a launch-ready delivery.",
+    "howItWorksTitle": "A Guided Journey From Vision to Delivery",
+    "howItWorksSubtitle": "AI handles the speed, our producers lead the craft. Five stages to transform your project.",
+    "step1Title": "Share Your Vision",
+    "step1Description": "Submit objectives, assets, and references through our guided brief so we align on goals and brand.",
+    "step2Title": "AI Feasibility Scan",
+    "step2Description": "Our diagnostic AI evaluates complexity, timelines, and risks while surfacing winning visual directions.",
+    "step3Title": "Expert Proposal",
+    "step3Description": "Producers curate the ideal talent, moodboards, and a transparent roadmap for your approval.",
+    "step4Title": "Co-Create in Studio",
+    "step4Description": "Collaborate with ILYR artists inside the hybrid workspace, review prototypes, and iterate with real-time feedback.",
+    "step5Title": "Deliver & Launch",
+    "step5Description": "Receive cinematic assets, rollout kits, and activation recommendations ready to go live.",
+    "inspirationFeedTitle": "Expertise in Action",
+    "inspirationFeedSubtitle": "Explore highlighted case studies and behind-the-scenes from our studio-led productions.",
+    "inspirationFeedButton": "View Case Studies",
+    "gamificationTitle": "Partnerships That Scale",
+    "gamificationSubtitle": "Track milestones, approvals, and delivered assets across every initiative with total clarity.",
+    "gamificationBadge1": "Discovery Complete",
+    "gamificationBadge2": "Prototype Approved",
+    "gamificationBadge3": "Launch Live",
+    "gamificationButton": "Open Client Portal",
+    "creativeAnalysis": {
+      "title": "AI Production Feasibility Assistant",
+      "description": "Upload a reference or idea and receive a feasibility report, recommended pipeline, and whether we assign an expert squad.",
+      "button": "Request Feasibility Review"
+    },
+    "dashboard": {
+      "title": "Your <span class='gradient-text'>Client Command Center</span>",
+      "description": "Brief projects, approve milestones, review assets, and converse with our producers from one secure hub.",
+      "step1": "Submit Brief",
+      "step2": "Review Proposal",
+      "step3": "Approve Production",
+      "step4": "Collaborate & Comment",
+      "step5": "Download & Launch",
+      "ctaTitle": "Ready to <span class='gradient-text'>Co-Create Your Next Launch</span>?",
+      "ctaDescription": "Log into the ILYR Desk to follow progress or request a new production with our team.",
+      "ctaButtonAccess": "Enter Client Portal",
+      "ctaButtonCreate": "Request Access"
+    },
+    "demo": {
+      "title": "<span class='gradient-text'>Vision Preview Lab</span>: Explore Possibilities",
+      "description": "Discover how AI prototypes jump-start our collaboration. Log in to experiment with guided prompts.",
+      "setupTitle": "Share Context for the Prototype",
+      "setupDescription": "Provide key details so we can scope the first exploration.",
+      "referenceImage": "Reference Image",
+      "uploadFile": "Upload a file",
+      "dragHere": "or drag it here",
+      "describeIdea": "Describe Your Idea",
+      "ideaPlaceholder": "e.g., Elegant watch on marble...",
+      "visualStyle": "Visual Style",
+      "stylePlaceholder": "Choose an aesthetic",
+      "visualStyles": [
+        {"value": "cgi-comercial-lujo", "label": "Luxury Commercial CGI"},
+        {"value": "loop-animado-redes", "label": "Animated Loop for Social Media"},
+        {"value": "animacion-producto-tech", "label": "Tech Product Animation"},
+        {"value": "motion-design-abstracto", "label": "Abstract and Vibrant Motion Design"},
+        {"value": "vfx-cinematico-sutil", "label": "Subtle and Elegant Cinematic VFX"},
+        {"value": "estilo-vintage-modernizado", "label": "Modernized Vintage Style"},
+        {"value": "minimalista-conceptual", "label": "Minimalist and Clean Conceptual"}
+      ],
+      "generating": "Scoping...",
+      "generate": "Request Preview",
+      "resultTitle": "Strategic Preview",
+      "resultDescription": "The initial AI concept will appear here for discussion.",
+      "creatingVision": "Analyzing your brief...",
+      "magicAwaits": "Preparing recommendations.",
+      "lockTitle": "Exclusive for Clients",
+      "lockDescription": "Access the preview lab by joining an active project with ILYR.art.",
+      "lockButton": "Login",
+      "toast": {
+        "incompleteTitle": "Missing Inputs",
+        "incompleteDesc": "Upload references, describe your idea, and select a direction to continue.",
+        "generatedTitle": "✨ Preview Requested!",
+        "generatedDesc": "This simulation represents how our team validates ideas before the real production room kicks in.",
+        "authRequiredTitle": "🔒 Access Required",
+        "authRequiredDesc": "Log in or request access to test the preview lab."
+      }
+    },
+    "faq": {
+      "title": "Frequently <span class='gradient-text'>Asked Questions</span> (FAQ)",
+      "description": "We answer your key questions about how ILYR.art can transform your creative process and boost your results.",
+      "questions": [
+        { "question": "Does ILYR.art's AI replace professional designers?", "answer": "Absolutely not! ILYR.art is a symbiotic tool designed to enhance human creativity. Our AI automates complex and repetitive technical tasks, freeing up designers and artists to focus on strategy, conceptualization, art direction, and the unique spark only a human can provide. It's a human-AI collaboration for exponential results." },
+        { "question": "Can I download the results and what formats are available?", "answer": "Yes, of course. The available formats and resolutions depend on your subscription plan. We offer everything from web-optimized previews (JPG, PNG) to ultra-high-resolution master files (4K/8K+, formats like EXR, TIFF, and ProRes/DNxHR video sequences). Studio and Enterprise plans unlock the most professional and customizable options." },
+        { "question": "How does the payment process work for a commissioned production?", "answer": "Full productions are quoted on a custom basis after you approve the AI-generated preview and we define the final scope. We will provide you with a transparent and detailed budget. Typically, we work with an initial payment (e.g., 50%) to start production, and the rest is settled upon final delivery and your complete satisfaction." },
+        { "question": "Can I use ILYR.art if I have no technical knowledge of design or 3D?", "answer": "Definitely! ILYR.art is designed with an intuitive interface and guided workflows. If you have a clear idea, you can generate impactful visualizations with ease. For advanced users, we offer granular controls and deep customization options, but the foundation is accessible and empowering for all experience levels." },
+        { "question": "What level of customization do I have over the style of the AI-generated scene?", "answer": "With ILYR.Studio™ (available in Creator plans and up), you will have significant artistic control to adjust camera angles, dynamic lighting, PBR materials, color palettes, atmospheric effects, composition, and much more. The AI gives you an excellent and highly adaptable starting point, and you refine it to perfection." },
+        { "question": "What types of files can I upload as an initial reference for the AI?", "answer": "You can upload images in common formats like JPG, PNG, WEBP, and even GIFs. For more complex ideas or 3D references, in advanced plans, we support formats like .obj, .fbx, and others, subject to project specifications. We are constantly expanding format compatibility." },
+        { "question": "How long does it typically take to generate a high-quality AI preview?", "answer": "Basic previews are generated in a matter of seconds to a couple of minutes. More complex visualizations or those with a higher level of photorealism may take a bit longer, but our platform is cloud-optimized to deliver speed without sacrificing final quality. Exact times vary depending on complexity." },
+        { "question": "How do you ensure the security and confidentiality of my files and ideas on the platform?", "answer": "The security and confidentiality of your projects are our top priority. We use end-to-end encryption (AES-256), industry-standard security protocols (SSL/TLS), and secure cloud storage. Your creations and ideas are and always will be yours. See our privacy policy for more details." }
+      ],
+      "ctaTitle": "Have <span class='gradient-text'>More Questions</span> or Need Help?",
+      "ctaDescription": "Our expert support team is ready to help you with any specific inquiries or guidance you need for your project.",
+      "ctaButton": "Contact Technical Support",
+      "toast": {
+        "devTitle": "🚧 Feature in development",
+        "devDesc": "We're working on {{feature}}. It will be available soon! 🚀"
+      }
+    },
+    "modules": {
+      "title": "The <span class='gradient-text'>ILYR.art Service Stack</span>",
+      "description": "Technology and human expertise orchestrated to deliver premium visual storytelling.",
+      "module1_desc": "AI diagnostics and predictive moodboards to validate your idea fast.",
+      "module2_desc": "Collaborative production environment for directors, artists, and clients.",
+      "module3_desc": "Intelligent talent matching across our network of senior specialists.",
+      "module4_desc": "Delivery kits with editable assets, guidelines, and rollout playbooks.",
+      "module5_desc": "Trend intelligence and performance insights to guide decisions.",
+      "module6_desc": "Unified client portal for briefs, approvals, messaging, and files.",
+      "ctaTitle": "<span class='gradient-text'>Built Around Your Team</span>",
+      "ctaDescription": "Every module syncs to keep strategy, craft, and delivery aligned throughout the engagement.",
+      "ctaButtonDashboard": "Go to Client Portal",
+      "ctaButtonLogin": "Sign In to Collaborate"
+    },
+    "pricing": {
+      "title": "Flexible <span class='gradient-text'>Plans & Pricing</span>",
+      "description": "Choose the plan that boosts your creativity and adapts to your business needs. No hidden commitments.",
+      "mostPopular": "MOST POPULAR",
+      "comingSoon": "Coming Soon",
+      "customSolution": "Custom Solution",
+      "forever": "forever",
+      "perMonth": "/ month",
+      "plans": [
+        { "name": "Explorer", "description": "Start experimenting with visual creation with AI, at no cost.", "buttonText": "Start for Free" },
+        { "name": "Creator Pro", "description": "Ideal for individual creators and freelancers looking for more power.", "buttonText": "Learn More" },
+        { "name": "Studio Max", "description": "For agencies and professional teams that demand maximum performance.", "buttonText": "Learn More" },
+        { "name": "Enterprise", "description": "Custom solutions, AI at scale, and premium support for large companies.", "buttonText": "Contact Sales" }
+      ],
+      "features": {
+        "explorer": ["AI Previews", "Basic ILYR.Preview™ Access", "Standard Resolution (HD)", "Community Support", "Limited ILYR.Studio™ Editor Access", "AI Branding Pack"],
+        "creator": ["AI Previews", "Full ILYR.Preview™ Access", "Essential ILYR.Studio™ Access", "High Resolution (4K)", "Basic AI Branding Pack", "Priority Email Support"],
+        "studio": ["AI Previews", "Advanced ILYR.Preview™ Access", "Full ILYR.Studio™ Access", "Ultra Resolution (4K+/8K)", "Advanced AI Branding Pack", "ILYR.Match™ for Teams", "Dedicated Pro Support & Chat"],
+        "enterprise": ["Everything in Studio Max, and more", "Full ILYR.API™ Access", "ILYR.Trends™ Pro Insights", "Dedicated Account Manager & SLA", "Strategic AI Consulting", "Custom AI Developments"]
+      },
+      "featureValues": {
+        "explorer": ["1 / month", true, true, true, "Limited", false],
+        "creator": ["25 / month", true, true, true, true, true],
+        "studio": ["infinite", true, true, true, true, true, true],
+        "enterprise": [true, true, true, true, true, true]
+      },
+      "ctaTitle": "Need a <span class='gradient-text'>Custom Solution</span> or to Compare?",
+      "ctaDescription": "For large-scale projects, specific needs, or a detailed comparison, our team is ready to advise you.",
+      "ctaButtonCompare": "Compare Plans in Detail",
+      "ctaButtonContact": "Talk to a Specialist",
+      "toast": {
+        "designTitle": "🚧 Plan in design",
+        "designDesc": "We are adjusting the details of the {{plan}} plan. It will be ready soon! 🚀"
+      }
+    }
+  },
+  "banner": {
+    "title": "ILYR.art is evolving!",
+    "description": "For a more professional experience, we've separated the public area from the creative tools. Log in to explore your dashboard!",
+    "login": "Login",
+    "joinWaitlist": "Join Waitlist"
+  }
+}

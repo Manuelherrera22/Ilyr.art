@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Limpiar Cache - ILYR.art</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .container {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0,0,0,0.3);
+            border-radius: 1rem;
+            backdrop-filter: blur(10px);
+        }
+        button {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            background: white;
+            color: #667eea;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            margin: 0.5rem;
+        }
+        button:hover {
+            background: #f0f0f0;
+        }
+        #status {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(0,0,0,0.2);
+            border-radius: 0.5rem;
+            min-height: 100px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧹 Limpiador de Cache y Service Workers</h1>
+        <p>Haz clic en el botón para limpiar todo el cache y Service Workers</p>
+        <button onclick="clearEverything()">Limpiar Todo</button>
+        <button onclick="window.location.href='/'">Ir a la App</button>
+        <div id="status"></div>
+    </div>
+
+    <script>
+        const status = document.getElementById('status');
+        
+        function log(message) {
+            const p = document.createElement('p');
+            p.textContent = message;
+            status.appendChild(p);
+            console.log(message);
+        }
+
+        async function clearEverything() {
+            status.innerHTML = '';
+            log('🚀 Iniciando limpieza...');
+
+            // 1. Service Workers
+            if ('serviceWorker' in navigator) {
+                try {
+                    const registrations = await navigator.serviceWorker.getRegistrations();
+                    log(`📋 Encontrados ${registrations.length} Service Worker(s)`);
+                    
+                    for (let registration of registrations) {
+                        const success = await registration.unregister();
+                        log(success ? `✅ Desregistrado: ${registration.scope}` : `⚠️ Error: ${registration.scope}`);
+                    }
+                } catch (error) {
+                    log(`❌ Error con Service Workers: ${error.message}`);
+                }
+            }
+
+            // 2. Cachés
+            if ('caches' in window) {
+                try {
+                    const cacheNames = await caches.keys();
+                    log(`📦 Encontradas ${cacheNames.length} caché(s)`);
+                    
+                    for (let name of cacheNames) {
+                        await caches.delete(name);
+                        log(`🗑️ Eliminada: ${name}`);
+                    }
+                } catch (error) {
+                    log(`❌ Error con cachés: ${error.message}`);
+                }
+            }
+
+            // 3. Storage
+            try {
+                localStorage.clear();
+                sessionStorage.clear();
+                log('🧹 localStorage y sessionStorage limpiados');
+            } catch (error) {
+                log(`❌ Error limpiando storage: ${error.message}`);
+            }
+
+            // 4. IndexedDB (si existe)
+            if ('indexedDB' in window) {
+                try {
+                    const databases = await indexedDB.databases();
+                    for (let db of databases) {
+                        indexedDB.deleteDatabase(db.name);
+                        log(`🗄️ Eliminada base de datos: ${db.name}`);
+                    }
+                } catch (error) {
+                    log(`❌ Error con IndexedDB: ${error.message}`);
+                }
+            }
+
+            log('✨ ¡Limpieza completada!');
+            log('🔄 Redirigiendo en 2 segundos...');
+            
+            setTimeout(() => {
+                window.location.href = '/';
+            }, 2000);
+        }
+
+        // Auto-ejecutar al cargar
+        window.addEventListener('load', () => {
+            log('📄 Página cargada. Listo para limpiar.');
+        });
+    </script>
+</body>
+</html>
+

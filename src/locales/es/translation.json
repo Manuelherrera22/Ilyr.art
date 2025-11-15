@@ -1,0 +1,240 @@
+{
+  "header": {
+    "howItWorks": "Cómo Funciona",
+    "aiAnalysis": "Análisis IA",
+    "aiModules": "Módulos IA",
+    "plans": "Planes",
+    "faq": "FAQ",
+    "login": "Iniciar Sesión",
+    "createAccount": "Unirse a la Lista",
+    "dashboard": "Portal",
+    "logout": "Cerrar Sesión"
+  },
+  "footer": {
+    "tagline": "Visualiza. <span class='text-accent'>Conecta.</span> Transforma.",
+    "quickLinks": "Enlaces Rápidos",
+    "legalAndPrivacy": "Legal y Privacidad",
+    "socialMedia": "Redes Sociales",
+    "compliance": "Cumplimiento",
+    "legalContact": "Contacto Legal",
+    "copyright": "© {{year}} ILYR.art – Todos los derechos reservados.",
+    "holding": "Parte del holding creativo",
+    "securityStandards": "Operamos bajo estrictos estándares de seguridad digital y cumplimiento regulatorio internacional.",
+    "nav": {
+      "home": "Inicio",
+      "demo": "Demo IA",
+      "pricing": "Precios",
+      "login": "Iniciar Sesión"
+    },
+    "legal": {
+      "privacy": "Política de Privacidad",
+      "terms": "Términos de Uso",
+      "notice": "Aviso Legal",
+      "cookies": "Gestión de Cookies",
+      "contact": "Contacto Legal",
+      "deleteAccount": "Eliminar Cuenta"
+    },
+    "toast": {
+      "featureDev": "🚧 Funcionalidad en desarrollo",
+      "featureDevDesc": "El enlace a {{feature}} se está preparando. ¡Vuelve pronto! 🚀",
+      "sectionNotFound": "🚧 Sección no encontrada",
+      "sectionNotFoundDesc": "No pudimos encontrar la sección {{sectionId}}. ¡Estamos en ello!"
+    }
+  },
+  "waitlist": {
+    "title": "Únete a la Lista de Espera",
+    "description": "Sé el primero en saber cuándo se lanza ILYR.art. Únete a la revolución visual.",
+    "placeholder": "tu@email.com",
+    "button": "Unirme Ahora",
+    "successTitle": "✅ ¡Estás en la lista!",
+    "successDescription": "Te notificaremos tan pronto como lancemos. ¡Prepárate!",
+    "errorTitle": "❌ ¡Ups! Algo salió mal.",
+    "errorExists": "Este correo electrónico ya está en nuestra lista de espera.",
+    "errorInvalid": "Por favor, introduce una dirección de correo válida.",
+    "backToHome": "Volver al Inicio",
+    "haveAccount": "¿Ya tienes una cuenta?",
+    "login": "Inicia sesión aquí"
+  },
+  "login": {
+    "title": "Iniciar Sesión",
+    "description": "Accede a tu dashboard creativo.",
+    "emailLabel": "Correo Electrónico",
+    "passwordLabel": "Contraseña",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "button": "Iniciar Sesión",
+    "loading": "Iniciando Sesión...",
+    "noAccount": "¿Aún no tienes cuenta?",
+    "joinWaitlist": "Únete a la lista de espera ahora",
+    "successTitle": "✅ ¡Bienvenido de vuelta!",
+    "successDescription": "Redirigiendo a tu dashboard...",
+    "errorTitle": "❌ Error de inicio de sesión",
+    "backToHome": "Volver al Inicio"
+  },
+  "authModal": {
+    "loginTitle": "Iniciar Sesión",
+    "loginDescription": "Accede a tu dashboard creativo y continúa transformando ideas en realidad visual.",
+    "switchToRegisterDisabled": "El registro está cerrado. ¡Únete a la lista de espera!",
+    "haveAccount": "¿Ya tienes cuenta? Inicia sesión"
+  },
+  "home": {
+    "heroTitle": "Trae tu visión. <span class='gradient-text'>Co-creamos</span> junto a nuestro estudio experto.",
+    "heroSubtitle": "IA + talento humano especializado. Narrativas visuales cinematográficas para tu marca.",
+    "heroExploreButton": "Iniciar mi Brief",
+    "heroUploadButton": "Agendar Llamada",
+    "heroSubtext": "Desde la primera chispa hasta la entrega lista para lanzar.",
+    "howItWorksTitle": "Un viaje guiado de la visión a la entrega",
+    "howItWorksSubtitle": "IA para velocidad. Equipo experto para artesanía. Cinco etapas claras.",
+    "step1Title": "Comparte tu visión",
+    "step1Description": "Brief guiado: objetivos, activos y referencias para alinear marca y metas.",
+    "step2Title": "Escaneo de viabilidad IA",
+    "step2Description": "IA evalúa complejidad, tiempos y riesgos. Propone direcciones visuales ganadoras.",
+    "step3Title": "Propuesta experta",
+    "step3Description": "Talentos ideales, moodboards y hoja de ruta transparente para tu aprobación.",
+    "step4Title": "Co-crea en el estudio",
+    "step4Description": "Colabora con artistas ILYR. Revisa prototipos e itera con feedback en tiempo real.",
+    "step5Title": "Entrega y lanzamiento",
+    "step5Description": "Assets cinematográficos, kits de despliegue y recomendaciones listas para activar.",
+    "inspirationFeedTitle": "Expertise en acción",
+    "inspirationFeedSubtitle": "Explora casos de estudio destacados y detrás de cámaras de nuestras producciones dirigidas por el estudio. Cada proyecto es co-creado con nuestros clientes utilizando IA y talento humano especializado.",
+    "inspirationFeedButton": "Ver Proyectos del Estudio",
+    "gamificationTitle": "Alianzas que escalan",
+    "gamificationSubtitle": "Sigue hitos, aprobaciones y entregables de cada iniciativa con total claridad. Colabora con nuestro equipo en tiempo real y mantén el control total de tus proyectos.",
+    "gamificationBadge1": "Brief completado",
+    "gamificationBadge2": "Producción aprobada",
+    "gamificationBadge3": "Entrega finalizada",
+    "gamificationButton": "Acceder a mi Portal",
+    "creativeAnalysis": {
+      "title": "Asistente de Viabilidad de Producción IA",
+      "description": "Sube una referencia o idea y recibe un informe de viabilidad, el pipeline recomendado y si asignamos un squad experto.",
+      "button": "Solicitar Evaluación de Viabilidad"
+    },
+    "dashboard": {
+      "title": "Tu <span class='gradient-text'>Centro de Comando de Cliente</span>",
+      "description": "Briefs, aprobaciones, assets y comunicación. Todo en un hub seguro y organizado.",
+      "step1": "Enviar Brief",
+      "step2": "Revisar Propuesta",
+      "step3": "Aprobar Producción",
+      "step4": "Colaborar y Comentar",
+      "step5": "Descargar y Lanzar",
+      "ctaTitle": "¿Listo para <span class='gradient-text'>co-crear tu próximo lanzamiento</span>?",
+      "ctaDescription": "Accede a ILYR Desk: sigue avances y solicita nuevas producciones.",
+      "ctaButtonAccess": "Entrar al Portal",
+      "ctaButtonCreate": "Solicitar Acceso"
+    },
+    "demo": {
+      "title": "<span class='gradient-text'>Laboratorio de Visión</span>: Explora Posibilidades",
+      "description": "Descubre cómo los prototipos IA impulsan la colaboración. Inicia sesión para experimentar con prompts guiados.",
+      "setupTitle": "Comparte contexto para el prototipo",
+      "setupDescription": "Proporciona datos clave para dimensionar la primera exploración.",
+      "referenceImage": "Imagen de Referencia",
+      "uploadFile": "Sube un archivo",
+      "dragHere": "o arrástralo aquí",
+      "describeIdea": "Describe Tu Idea",
+      "ideaPlaceholder": "Ej: Reloj elegante sobre mármol...",
+      "visualStyle": "Estilo Visual",
+      "stylePlaceholder": "Elige una estética",
+      "visualStyles": [
+        {"value": "cgi-comercial-lujo", "label": "CGI Comercial de Lujo"},
+        {"value": "loop-animado-redes", "label": "Loop Animado para Redes"},
+        {"value": "animacion-producto-tech", "label": "Animación de Producto Tecnológico"},
+        {"value": "motion-design-abstracto", "label": "Motion Design Abstracto y Vibrante"},
+        {"value": "vfx-cinematico-sutil", "label": "VFX Cinemático Sutil y Elegante"},
+        {"value": "estilo-vintage-modernizado", "label": "Estilo Vintage Modernizado"},
+        {"value": "minimalista-conceptual", "label": "Minimalista y Conceptual Limpio"}
+      ],
+      "generating": "Dimensionando...",
+      "generate": "Solicitar Previsualización",
+      "resultTitle": "Previsualización Estratégica",
+      "resultDescription": "El concepto inicial de IA aparecerá aquí para la conversación.",
+      "creatingVision": "Analizando tu brief...",
+      "magicAwaits": "Preparando recomendaciones.",
+      "lockTitle": "Exclusivo para clientes",
+      "lockDescription": "Accede al laboratorio uniéndote a un proyecto activo con ILYR.art.",
+      "lockButton": "Iniciar Sesión",
+      "toast": {
+        "incompleteTitle": "Faltan datos",
+        "incompleteDesc": "Sube referencias, describe tu idea y elige una dirección para continuar.",
+        "generatedTitle": "✨ ¡Previsualización solicitada!",
+        "generatedDesc": "Esta simulación representa cómo validamos ideas antes de activar la sala de producción real.",
+        "authRequiredTitle": "🔒 Acceso requerido",
+        "authRequiredDesc": "Inicia sesión o solicita acceso para probar el laboratorio."
+      }
+    },
+    "faq": {
+      "title": "Preguntas <span class='gradient-text'>Frecuentes</span> (FAQ)",
+      "description": "Respondemos tus dudas clave sobre cómo ILYR.art puede transformar tu proceso creativo y potenciar tus resultados.",
+      "questions": [
+        { "question": "¿La IA de ILYR.art reemplaza a los diseñadores profesionales?", "answer": "¡Absolutamente no! ILYR.art es una herramienta simbiótica diseñada para potenciar la creatividad humana. Nuestra IA automatiza tareas técnicas complejas y repetitivas, liberando a diseñadores y artistas para que se centren en la estrategia, la conceptualización, la dirección de arte y la chispa única que solo un humano puede aportar. Es una colaboración humano-IA para resultados exponenciales." },
+        { "question": "¿Puedo descargar los resultados y qué formatos están disponibles?", "answer": "Sí, por supuesto. Los formatos y resoluciones disponibles dependen de tu plan de suscripción. Ofrecemos desde previsualizaciones optimizadas para web (JPG, PNG) hasta archivos maestros de ultra alta resolución (4K/8K+, formatos como EXR, TIFF y secuencias de video ProRes/DNxHR). Los planes Studio y Enterprise desbloquean las opciones más profesionales y personalizables." },
+        { "question": "¿Cómo funciona el proceso de pago para una producción por encargo?", "answer": "Las producciones completas se cotizan de forma personalizada después de que apruebes la previsualización generada por IA y definamos el alcance final. Te proporcionaremos un presupuesto transparente y detallado. Normalmente, trabajamos con un pago inicial (ej. 50%) para comenzar la producción, y el resto se liquida en la entrega final y tu completa satisfacción." },
+        { "question": "¿Puedo usar ILYR.art si no tengo conocimientos técnicos de diseño o 3D?", "answer": "¡Definitivamente! ILYR.art está diseñado con una interfaz intuitiva y flujos de trabajo guiados. Si tienes una idea clara, puedes generar visualizaciones impactantes con facilidad. Para usuarios avanzados, ofrecemos controles granulares y opciones de personalización profundas, pero la base es accesible y empoderadora para todos los niveles de experiencia." },
+        { "question": "¿Qué nivel de personalización tengo sobre el estilo de la escena generada por IA?", "answer": "Con ILYR.Studio™ (disponible en planes Creator en adelante), tendrás un control artístico significativo para ajustar ángulos de cámara, iluminación dinámica, materiales PBR, paletas de color, efectos atmosféricos, composición y mucho más. La IA te da un punto de partida excelente y muy adaptable, y tú lo refinas hasta la perfección." },
+        { "question": "¿Qué tipo de archivos puedo subir como referencia inicial para la IA?", "answer": "Puedes subir imágenes en formatos comunes como JPG, PNG, WEBP e incluso GIFs. Para ideas más complejas o referencias 3D, en planes avanzados, admitimos formatos como .obj, .fbx y otros, sujeto a las especificaciones del proyecto. Estamos constantemente ampliando la compatibilidad de formatos." },
+        { "question": "¿Cuánto tiempo tarda normalmente en generarse una previsualización de alta calidad con IA?", "answer": "Las previsualizaciones básicas se generan en cuestión de segundos a un par de minutos. Las visualizaciones más complejas o con un mayor nivel de fotorrealismo pueden tardar un poco más, pero nuestra plataforma está optimizada en la nube para ofrecer velocidad sin sacrificar la calidad final. Los tiempos exactos varían según la complejidad." },
+        { "question": "¿Cómo garantizan la seguridad y confidencialidad de mis archivos e ideas en la plataforma?", "answer": "La seguridad y confidencialidad de tus proyectos son nuestra máxima prioridad. Usamos encriptación de extremo a extremo (AES-256), protocolos de seguridad estándar de la industria (SSL/TLS) y almacenamiento seguro en la nube. Tus creaciones e ideas son y siempre serán tuyas. Consulta nuestra política de privacidad para más detalles." }
+      ],
+      "ctaTitle": "¿Tienes <span class='gradient-text'>Más Preguntas</span> o Necesitas Ayuda?",
+      "ctaDescription": "Nuestro equipo de soporte experto está listo para ayudarte con cualquier consulta específica o guía que necesites para tu proyecto.",
+      "ctaButton": "Contactar con Soporte Técnico",
+      "toast": {
+        "devTitle": "🚧 Funcionalidad en desarrollo",
+        "devDesc": "Estamos trabajando en {{feature}}. ¡Estará disponible pronto! 🚀"
+      }
+    },
+    "modules": {
+      "title": "La <span class='gradient-text'>Arquitectura de Servicio ILYR.art</span>",
+      "description": "IA + talento humano. Storytelling visual de primer nivel.",
+      "module1_desc": "Diagnósticos IA y moodboards predictivos. Valida ideas rápidamente.",
+      "module2_desc": "Producción colaborativa para directores, artistas y clientes.",
+      "module3_desc": "Match inteligente con especialistas senior.",
+      "module4_desc": "Kits de entrega: assets editables, guías y playbooks.",
+      "module5_desc": "Inteligencia de tendencias y performance para decisiones.",
+      "module6_desc": "Portal unificado: briefs, aprobaciones, mensajes y archivos.",
+      "ctaTitle": "<span class='gradient-text'>Diseñado para tu equipo</span>",
+      "ctaDescription": "Módulos sincronizados: estrategia, craft y delivery alineados.",
+      "ctaButtonDashboard": "Ir al Portal de Cliente",
+      "ctaButtonLogin": "Inicia sesión para colaborar"
+    },
+    "pricing": {
+      "title": "Planes y <span class='gradient-text'>Servicios Profesionales</span>",
+      "description": "Precios competitivos para LATAM. Elige el nivel de servicio que se adapta a tus necesidades. Desde proyectos puntuales hasta alianzas estratégicas continuas.",
+      "mostPopular": "MÁS POPULAR",
+      "comingSoon": "Próximamente",
+      "customSolution": "A Medida",
+      "forever": "para siempre",
+      "perMonth": "/ mes",
+      "plans": [
+        { "name": "Starter", "description": "Ideal para proyectos puntuales y marcas que inician su transformación visual.", "buttonText": "Solicitar Brief" },
+        { "name": "Professional", "description": "Para marcas que requieren producción continua y colaboración estratégica.", "buttonText": "Saber Más" },
+        { "name": "Studio", "description": "Alianzas a largo plazo con equipo dedicado y pipeline optimizado.", "buttonText": "Saber Más" },
+        { "name": "Enterprise", "description": "Soluciones personalizadas, equipos dedicados y soporte premium para grandes empresas.", "buttonText": "Contactar con Ventas" }
+      ],
+      "features": {
+        "explorer": ["Briefs ilimitados", "Evaluación IA de viabilidad", "Propuesta con moodboards", "Hasta 2 revisiones por proyecto", "Entrega en HD/4K", "Soporte por email"],
+        "creator": ["Briefs ilimitados", "Evaluación IA avanzada", "Propuestas con múltiples opciones", "Hasta 4 revisiones por proyecto", "Entrega en 4K/8K", "Soporte prioritario y chat", "Acceso a portal colaborativo"],
+        "studio": ["Briefs ilimitados", "Evaluación IA + consultoría", "Propuestas premium con múltiples variantes", "Revisiones ilimitadas", "Entrega en 4K+/8K+ con assets editables", "Productor dedicado", "Soporte pro 24/7", "Acceso completo al portal"],
+        "enterprise": ["Todo en Studio y más", "Equipo dedicado por proyecto", "Consultoría estratégica IA", "Pipeline personalizado", "SLA garantizado", "Manager de cuenta dedicado", "Desarrollos IA a medida", "Integraciones personalizadas"]
+      },
+      "featureValues": {
+        "explorer": [true, true, true, "2 revisiones", "HD/4K", true],
+        "creator": [true, true, true, "4 revisiones", "4K/8K", true, true],
+        "studio": [true, true, true, "Ilimitadas", "4K+/8K+", true, true, true],
+        "enterprise": [true, true, true, true, true, true, true, true]
+      },
+      "ctaTitle": "¿Necesitas una <span class='gradient-text'>Solución a Medida</span> o Comparar?",
+      "ctaDescription": "Para proyectos a gran escala, necesidades específicas o una comparativa detallada, nuestro equipo está listo para asesorarte.",
+      "ctaButtonCompare": "Comparar Planes Detalladamente",
+      "ctaButtonContact": "Hablar con un Especialista",
+      "toast": {
+        "designTitle": "🚧 Plan en diseño",
+        "designDesc": "Estamos ajustando los detalles del plan {{plan}}. ¡Estará listo pronto! 🚀"
+      }
+    }
+  },
+  "banner": {
+    "title": "¡ILYR.art evoluciona!",
+    "description": "Para una experiencia más profesional, hemos separado la zona pública de las herramientas creativas. ¡Inicia sesión para explorar tu dashboard!",
+    "login": "Iniciar Sesión",
+    "joinWaitlist": "Unirse a la Lista"
+  }
+}

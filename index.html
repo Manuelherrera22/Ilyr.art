@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" type="image/svg+xml" href="/vite.svg" />
+		<meta name="generator" content="Hostinger Horizons" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="0" />
+		<title>ILYR.art - Visualiza tu idea. Transfórmala en una obra visual.</title>
+		<meta name="description" content="Desde una simple imagen hasta una producción CGI cinematográfica. Bienvenido al futuro de la creación visual." />
+	</head>
+	<body>
+		<div id="root"></div>
+		<script>
+			// BLOQUEAR Y LIMPIAR SERVICE WORKERS ANTES DE CARGAR LA APP
+			(async function() {
+				console.log('🧹 Iniciando limpieza completa de cache y Service Workers...');
+				
+				// Bloquear nuevos registros de Service Workers
+				if ('serviceWorker' in navigator) {
+					// Override del método register para prevenir nuevos registros
+					const originalRegister = navigator.serviceWorker.register;
+					navigator.serviceWorker.register = function() {
+						console.warn('🚫 Bloqueado intento de registrar Service Worker');
+						return Promise.reject(new Error('Service Workers deshabilitados para este proyecto'));
+					};
+					
+					try {
+						// 1. Desregistrar TODOS los Service Workers
+						let registrations = await navigator.serviceWorker.getRegistrations();
+						console.log('📋 Encontrados', registrations.length, 'Service Worker(s)');
+						
+						// Intentar desregistrar hasta 3 veces si es necesario
+						for (let attempt = 0; attempt < 3; attempt++) {
+							if (registrations.length === 0) break;
+							
+							for (let registration of registrations) {
+								try {
+									const success = await registration.unregister();
+									if (success) {
+										console.log('✅ Service Worker desregistrado:', registration.scope);
+									}
+								} catch (error) {
+									console.error('❌ Error desregistrando:', registration.scope, error);
+								}
+							}
+							
+							// Esperar un momento y verificar de nuevo
+							await new Promise(resolve => setTimeout(resolve, 300));
+							registrations = await navigator.serviceWorker.getRegistrations();
+						}
+						
+						// 2. Limpiar TODAS las cachés
+						if ('caches' in window) {
+							const cacheNames = await caches.keys();
+							console.log('📦 Encontradas', cacheNames.length, 'caché(s)');
+							
+							await Promise.all(
+								cacheNames.map(async function(cacheName) {
+									console.log('🗑️ Eliminando caché:', cacheName);
+									await caches.delete(cacheName);
+								})
+							);
+							console.log('✅ Todas las cachés eliminadas');
+						}
+						
+						// 3. Forzar actualización del controller si existe
+						if (navigator.serviceWorker.controller) {
+							try {
+								navigator.serviceWorker.controller.postMessage({type: 'SKIP_WAITING'});
+								console.log('🔄 Enviado mensaje SKIP_WAITING');
+							} catch (e) {
+								console.warn('⚠️ No se pudo enviar mensaje al controller');
+							}
+						}
+						
+						// 4. Verificación final
+						const finalRegistrations = await navigator.serviceWorker.getRegistrations();
+						if (finalRegistrations.length > 0) {
+							console.warn('⚠️ Aún quedan', finalRegistrations.length, 'Service Worker(s). Forzando desregistro...');
+							for (let reg of finalRegistrations) {
+								await reg.unregister();
+							}
+						} else {
+							console.log('✅ Todos los Service Workers desregistrados correctamente');
+						}
+						
+					} catch (error) {
+						console.error('❌ Error en limpieza:', error);
+					}
+				}
+				
+				console.log('✨ Limpieza completada. Cargando aplicación...');
+			})();
+		</script>
+		<script type="module" src="/src/main.jsx"></script>
+	</body>
+</html>

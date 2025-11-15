@@ -1,0 +1,1 @@
+import{b as s,l as a,r as n,z as u,j as i,D as l}from"./index-1d1ce9ed.js";const f=()=>{const e=s(),{role:t,loadingProfile:r}=a();return n.useEffect(()=>{if(r)return;const o=u(t);e(o,{replace:!0})},[t,r,e]),i.jsx(l,{fullScreen:!0})};export{f as default};

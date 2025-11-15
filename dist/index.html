@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" type="image/svg+xml" href="/vite.svg" />
+		<meta name="generator" content="Hostinger Horizons" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="0" />
+		<title>ILYR.art - Visualiza tu idea. Transfórmala en una obra visual.</title>
+		<meta name="description" content="Desde una simple imagen hasta una producción CGI cinematográfica. Bienvenido al futuro de la creación visual." />
+		<script type="module" crossorigin src="/assets/index-1d1ce9ed.js"></script>
+		<link rel="stylesheet" href="/assets/index-df287018.css">
+		<script type="module">
+window.onerror = (message, source, lineno, colno, errorObj) => {
+	const errorDetails = errorObj ? JSON.stringify({
+		name: errorObj.name,
+		message: errorObj.message,
+		stack: errorObj.stack,
+		source,
+		lineno,
+		colno,
+	}) : null;
+
+	window.parent.postMessage({
+		type: 'horizons-runtime-error',
+		message,
+		error: errorDetails
+	}, '*');
+};
+</script>
+		<script type="module">
+const observer = new MutationObserver((mutations) => {
+	for (const mutation of mutations) {
+		for (const addedNode of mutation.addedNodes) {
+			if (
+				addedNode.nodeType === Node.ELEMENT_NODE &&
+				(
+					addedNode.tagName?.toLowerCase() === 'vite-error-overlay' ||
+					addedNode.classList?.contains('backdrop')
+				)
+			) {
+				handleViteOverlay(addedNode);
+			}
+		}
+	}
+});
+
+observer.observe(document.documentElement, {
+	childList: true,
+	subtree: true
+});
+
+function handleViteOverlay(node) {
+	if (!node.shadowRoot) {
+		return;
+	}
+
+	const backdrop = node.shadowRoot.querySelector('.backdrop');
+
+	if (backdrop) {
+		const overlayHtml = backdrop.outerHTML;
+		const parser = new DOMParser();
+		const doc = parser.parseFromString(overlayHtml, 'text/html');
+		const messageBodyElement = doc.querySelector('.message-body');
+		const fileElement = doc.querySelector('.file');
+		const messageText = messageBodyElement ? messageBodyElement.textContent.trim() : '';
+		const fileText = fileElement ? fileElement.textContent.trim() : '';
+		const error = messageText + (fileText ? ' File:' + fileText : '');
+
+		window.parent.postMessage({
+			type: 'horizons-vite-error',
+			error,
+		}, '*');
+	}
+}
+</script>
+		<script type="module">
+const originalConsoleError = console.error;
+console.error = function(...args) {
+	originalConsoleError.apply(console, args);
+
+	let errorString = '';
+
+	for (let i = 0; i < args.length; i++) {
+		const arg = args[i];
+		if (arg instanceof Error) {
+			errorString = arg.stack || `${arg.name}: ${arg.message}`;
+			break;
+		}
+	}
+
+	if (!errorString) {
+		errorString = args.map(arg => typeof arg === 'object' ? JSON.stringify(arg) : String(arg)).join(' ');
+	}
+
+	window.parent.postMessage({
+		type: 'horizons-console-error',
+		error: errorString
+	}, '*');
+};
+</script>
+		<script type="module">
+const originalFetch = window.fetch;
+
+window.fetch = function(...args) {
+	const url = args[0] instanceof Request ? args[0].url : args[0];
+
+	// Skip WebSocket URLs
+	if (url.startsWith('ws:') || url.startsWith('wss:')) {
+		return originalFetch.apply(this, args);
+	}
+
+	return originalFetch.apply(this, args)
+		.then(async response => {
+			const contentType = response.headers.get('Content-Type') || '';
+
+			// Exclude HTML document responses
+			const isDocumentResponse =
+				contentType.includes('text/html') ||
+				contentType.includes('application/xhtml+xml');
+
+			if (!response.ok && !isDocumentResponse) {
+					const responseClone = response.clone();
+					const errorFromRes = await responseClone.text();
+					const requestUrl = response.url;
+					console.error(`Fetch error from ${requestUrl}: ${errorFromRes}`);
+			}
+
+			return response;
+		})
+		.catch(error => {
+			if (!url.match(/.html?$/i)) {
+				console.error(error);
+			}
+
+			throw error;
+		});
+};
+</script>
+		<script type="module">
+if (window.navigation && window.self !== window.top) {
+	window.navigation.addEventListener('navigate', (event) => {
+		const url = event.destination.url;
+
+		try {
+			const destinationUrl = new URL(url);
+			const destinationOrigin = destinationUrl.origin;
+			const currentOrigin = window.location.origin;
+
+			if (destinationOrigin === currentOrigin) {
+				return;
+			}
+		} catch (error) {
+			return;
+		}
+
+		window.parent.postMessage({
+			type: 'horizons-navigation-error',
+			url,
+		}, '*');
+	});
+}
+</script>
+	</head>
+	<body>
+		<div id="root"></div>
+		<script>
+			// BLOQUEAR Y LIMPIAR SERVICE WORKERS ANTES DE CARGAR LA APP
+			(async function() {
+				console.log('🧹 Iniciando limpieza completa de cache y Service Workers...');
+				
+				// Bloquear nuevos registros de Service Workers
+				if ('serviceWorker' in navigator) {
+					// Override del método register para prevenir nuevos registros
+					const originalRegister = navigator.serviceWorker.register;
+					navigator.serviceWorker.register = function() {
+						console.warn('🚫 Bloqueado intento de registrar Service Worker');
+						return Promise.reject(new Error('Service Workers deshabilitados para este proyecto'));
+					};
+					
+					try {
+						// 1. Desregistrar TODOS los Service Workers
+						let registrations = await navigator.serviceWorker.getRegistrations();
+						console.log('📋 Encontrados', registrations.length, 'Service Worker(s)');
+						
+						// Intentar desregistrar hasta 3 veces si es necesario
+						for (let attempt = 0; attempt < 3; attempt++) {
+							if (registrations.length === 0) break;
+							
+							for (let registration of registrations) {
+								try {
+									const success = await registration.unregister();
+									if (success) {
+										console.log('✅ Service Worker desregistrado:', registration.scope);
+									}
+								} catch (error) {
+									console.error('❌ Error desregistrando:', registration.scope, error);
+								}
+							}
+							
+							// Esperar un momento y verificar de nuevo
+							await new Promise(resolve => setTimeout(resolve, 300));
+							registrations = await navigator.serviceWorker.getRegistrations();
+						}
+						
+						// 2. Limpiar TODAS las cachés
+						if ('caches' in window) {
+							const cacheNames = await caches.keys();
+							console.log('📦 Encontradas', cacheNames.length, 'caché(s)');
+							
+							await Promise.all(
+								cacheNames.map(async function(cacheName) {
+									console.log('🗑️ Eliminando caché:', cacheName);
+									await caches.delete(cacheName);
+								})
+							);
+							console.log('✅ Todas las cachés eliminadas');
+						}
+						
+						// 3. Forzar actualización del controller si existe
+						if (navigator.serviceWorker.controller) {
+							try {
+								navigator.serviceWorker.controller.postMessage({type: 'SKIP_WAITING'});
+								console.log('🔄 Enviado mensaje SKIP_WAITING');
+							} catch (e) {
+								console.warn('⚠️ No se pudo enviar mensaje al controller');
+							}
+						}
+						
+						// 4. Verificación final
+						const finalRegistrations = await navigator.serviceWorker.getRegistrations();
+						if (finalRegistrations.length > 0) {
+							console.warn('⚠️ Aún quedan', finalRegistrations.length, 'Service Worker(s). Forzando desregistro...');
+							for (let reg of finalRegistrations) {
+								await reg.unregister();
+							}
+						} else {
+							console.log('✅ Todos los Service Workers desregistrados correctamente');
+						}
+						
+					} catch (error) {
+						console.error('❌ Error en limpieza:', error);
+					}
+				}
+				
+				console.log('✨ Limpieza completada. Cargando aplicación...');
+			})();
+		</script>
+		
+	</body>
+</html>
