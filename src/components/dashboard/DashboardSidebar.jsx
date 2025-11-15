@@ -132,7 +132,7 @@ const DashboardSidebar = ({ isCollapsed, toggleSidebar }) => {
       {/* Mobile Sidebar */}
       <motion.aside
         initial={false}
-        animate={{ x: isMobileMenuOpen ? 0 : '-100%' }}
+        animate={{ x: isSidebarCollapsed ? '-100%' : 0 }}
         transition={{ duration: 0.3, ease: 'easeInOut' }}
         className="fixed inset-y-0 left-0 w-64 bg-[#0B0D12]/95 backdrop-blur-xl flex flex-col border-r border-white/10 z-50 lg:hidden"
       >
@@ -155,7 +155,7 @@ const DashboardSidebar = ({ isCollapsed, toggleSidebar }) => {
                   variant={location.pathname === item.path ? "secondary" : "ghost"}
                   onClick={() => {
                     handleMenuClick(item);
-                    setIsMobileMenuOpen(false);
+                    toggleSidebar();
                   }}
                   className={`w-full text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300 justify-start group ${location.pathname === item.path ? 'bg-white/10 text-white' : ''}`}
                 >

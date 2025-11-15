@@ -7,6 +7,7 @@ import { VoiceAssistantProvider } from '@/contexts/VoiceAssistantContext';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import PublicRoute from '@/components/PublicRoute';
 import LoadingSpinner from '@/components/LoadingSpinner';
+import CookieBanner from '@/components/CookieBanner';
 import HomePage from '@/pages/HomePage';
 
 const LoginPage = React.lazy(() => import('@/pages/LoginPage'));
@@ -126,6 +127,7 @@ function App() {
           <div className="min-h-screen bg-background text-foreground scroll-smooth flex flex-col">
             <AppRoutes />
             <Toaster />
+            <CookieBanner />
           </div>
         </VoiceAssistantProvider>
       </ProfileProvider>

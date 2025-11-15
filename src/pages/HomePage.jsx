@@ -16,6 +16,7 @@ import GamificationSection from '@/components/GamificationSection';
 import CaseStudiesSection from '@/components/CaseStudiesSection';
 import AgenciesFreelancersSection from '@/components/AgenciesFreelancersSection';
 import ScrollProgress from '@/components/ScrollProgress';
+import CookieBanner from '@/components/CookieBanner';
 
 const HomePage = () => {
   return (
@@ -39,6 +40,7 @@ const HomePage = () => {
       </main>
       <Footer />
       <CreativeCopilotBubble />
+      <CookieBanner />
     </>
   );
 };
