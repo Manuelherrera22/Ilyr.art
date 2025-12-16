@@ -27,84 +27,120 @@
 		<div id="root"></div>
 		<script>
 			// BLOQUEAR Y LIMPIAR SERVICE WORKERS ANTES DE CARGAR LA APP
+			// Con timeout para no bloquear la carga de la aplicación
 			(async function() {
 				console.log('🧹 Iniciando limpieza completa de cache y Service Workers...');
 				
-				// Bloquear nuevos registros de Service Workers
-				if ('serviceWorker' in navigator) {
-					// Override del método register para prevenir nuevos registros
-					const originalRegister = navigator.serviceWorker.register;
-					navigator.serviceWorker.register = function() {
-						console.warn('🚫 Bloqueado intento de registrar Service Worker');
-						return Promise.reject(new Error('Service Workers deshabilitados para este proyecto'));
-					};
-					
-					try {
-						// 1. Desregistrar TODOS los Service Workers
-						let registrations = await navigator.serviceWorker.getRegistrations();
-						console.log('📋 Encontrados', registrations.length, 'Service Worker(s)');
+				// Timeout máximo de 3 segundos para la limpieza
+				const cleanupPromise = (async () => {
+					// Bloquear nuevos registros de Service Workers
+					if ('serviceWorker' in navigator) {
+						// Override del método register para prevenir nuevos registros
+						const originalRegister = navigator.serviceWorker.register;
+						navigator.serviceWorker.register = function() {
+							console.warn('🚫 Bloqueado intento de registrar Service Worker');
+							return Promise.reject(new Error('Service Workers deshabilitados para este proyecto'));
+						};
 						
-						// Intentar desregistrar hasta 3 veces si es necesario
-						for (let attempt = 0; attempt < 3; attempt++) {
-							if (registrations.length === 0) break;
+						try {
+							// 1. Desregistrar TODOS los Service Workers
+							let registrations = await navigator.serviceWorker.getRegistrations();
+							console.log('📋 Encontrados', registrations.length, 'Service Worker(s)');
 							
-							for (let registration of registrations) {
-								try {
-									const success = await registration.unregister();
-									if (success) {
-										console.log('✅ Service Worker desregistrado:', registration.scope);
+							// Intentar desregistrar hasta 2 veces si es necesario (reducido de 3)
+							for (let attempt = 0; attempt < 2; attempt++) {
+								if (registrations.length === 0) break;
+								
+								for (let registration of registrations) {
+									try {
+										const success = await registration.unregister();
+										if (success) {
+											console.log('✅ Service Worker desregistrado:', registration.scope);
+										}
+									} catch (error) {
+										console.error('❌ Error desregistrando:', registration.scope, error);
 									}
-								} catch (error) {
-									console.error('❌ Error desregistrando:', registration.scope, error);
+								}
+								
+								// Esperar un momento y verificar de nuevo
+								if (attempt < 1) {
+									await new Promise(resolve => setTimeout(resolve, 200));
+									registrations = await navigator.serviceWorker.getRegistrations();
 								}
 							}
 							
-							// Esperar un momento y verificar de nuevo
-							await new Promise(resolve => setTimeout(resolve, 300));
-							registrations = await navigator.serviceWorker.getRegistrations();
-						}
-						
-						// 2. Limpiar TODAS las cachés
-						if ('caches' in window) {
-							const cacheNames = await caches.keys();
-							console.log('📦 Encontradas', cacheNames.length, 'caché(s)');
+							// 2. Limpiar TODAS las cachés (con timeout individual)
+							if ('caches' in window) {
+								try {
+									const cacheNames = await Promise.race([
+										caches.keys(),
+										new Promise((_, reject) => setTimeout(() => reject(new Error('Cache keys timeout')), 1000))
+									]).catch(() => []);
+									
+									console.log('📦 Encontradas', cacheNames.length, 'caché(s)');
+									
+									await Promise.all(
+										cacheNames.map(async function(cacheName) {
+											try {
+												await Promise.race([
+													caches.delete(cacheName),
+													new Promise((_, reject) => setTimeout(() => reject(new Error('Delete timeout')), 500))
+												]);
+												console.log('🗑️ Eliminando caché:', cacheName);
+											} catch (e) {
+												console.warn('⚠️ No se pudo eliminar caché:', cacheName);
+											}
+										})
+									);
+									console.log('✅ Todas las cachés eliminadas');
+								} catch (error) {
+									console.warn('⚠️ Error al limpiar cachés:', error);
+								}
+							}
 							
-							await Promise.all(
-								cacheNames.map(async function(cacheName) {
-									console.log('🗑️ Eliminando caché:', cacheName);
-									await caches.delete(cacheName);
-								})
-							);
-							console.log('✅ Todas las cachés eliminadas');
-						}
-						
-						// 3. Forzar actualización del controller si existe
-						if (navigator.serviceWorker.controller) {
+							// 3. Forzar actualización del controller si existe
+							if (navigator.serviceWorker.controller) {
+								try {
+									navigator.serviceWorker.controller.postMessage({type: 'SKIP_WAITING'});
+									console.log('🔄 Enviado mensaje SKIP_WAITING');
+								} catch (e) {
+									console.warn('⚠️ No se pudo enviar mensaje al controller');
+								}
+							}
+							
+							// 4. Verificación final (rápida)
 							try {
-								navigator.serviceWorker.controller.postMessage({type: 'SKIP_WAITING'});
-								console.log('🔄 Enviado mensaje SKIP_WAITING');
+								const finalRegistrations = await Promise.race([
+									navigator.serviceWorker.getRegistrations(),
+									new Promise((_, reject) => setTimeout(() => reject(new Error('Final check timeout')), 500))
+								]).catch(() => []);
+								
+								if (finalRegistrations.length > 0) {
+									console.warn('⚠️ Aún quedan', finalRegistrations.length, 'Service Worker(s)');
+								} else {
+									console.log('✅ Todos los Service Workers desregistrados correctamente');
+								}
 							} catch (e) {
-								console.warn('⚠️ No se pudo enviar mensaje al controller');
+								console.warn('⚠️ Error en verificación final');
 							}
+							
+						} catch (error) {
+							console.error('❌ Error en limpieza:', error);
 						}
-						
-						// 4. Verificación final
-						const finalRegistrations = await navigator.serviceWorker.getRegistrations();
-						if (finalRegistrations.length > 0) {
-							console.warn('⚠️ Aún quedan', finalRegistrations.length, 'Service Worker(s). Forzando desregistro...');
-							for (let reg of finalRegistrations) {
-								await reg.unregister();
-							}
-						} else {
-							console.log('✅ Todos los Service Workers desregistrados correctamente');
-						}
-						
-					} catch (error) {
-						console.error('❌ Error en limpieza:', error);
 					}
-				}
+					
+					console.log('✨ Limpieza completada. Cargando aplicación...');
+				})();
 				
-				console.log('✨ Limpieza completada. Cargando aplicación...');
+				// Timeout de seguridad: si la limpieza tarda más de 3 segundos, continuar de todos modos
+				const timeoutPromise = new Promise(resolve => {
+					setTimeout(() => {
+						console.warn('⏱️ Timeout en limpieza, continuando con carga de app...');
+						resolve();
+					}, 3000);
+				});
+				
+				await Promise.race([cleanupPromise, timeoutPromise]);
 			})();
 		</script>
 		<script type="module" src="/src/main.jsx"></script>

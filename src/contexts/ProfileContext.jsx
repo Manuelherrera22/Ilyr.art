@@ -141,23 +141,34 @@ export const ProfileProvider = ({ children }) => {
 
     fetchProfile(user);
 
+    // Track access de forma no bloqueante - no debe afectar la carga
     if (user && session && !accessTracked) {
       const trackUserAccess = async () => {
         try {
-          await supabase.functions.invoke('log-user-access', {
-            headers: {
-              Authorization: `Bearer ${session.access_token}`,
-            },
-            body: { usuario_id: user.id, email: user.email },
-          });
+          // Timeout de 2 segundos para no bloquear
+          const timeoutPromise = new Promise((_, reject) => 
+            setTimeout(() => reject(new Error('Access tracking timeout')), 2000)
+          );
+          
+          await Promise.race([
+            supabase.functions.invoke('log-user-access', {
+              headers: {
+                Authorization: `Bearer ${session.access_token}`,
+              },
+              body: { usuario_id: user.id, email: user.email },
+            }),
+            timeoutPromise
+          ]);
           setAccessTracked(true);
         } catch (error) {
           // Silently fail - access tracking is not critical
+          setAccessTracked(true); // Marcar como tracked para no intentar de nuevo
           if (process.env.NODE_ENV === 'development') {
-            console.error('[AccessTracker] Error rastreando el acceso del usuario:', error.message);
+            console.warn('[AccessTracker] Error rastreando el acceso del usuario:', error.message);
           }
         }
       };
+      // Ejecutar en background sin bloquear
       trackUserAccess();
     }
   }, [user, session, fetchProfile, accessTracked]);

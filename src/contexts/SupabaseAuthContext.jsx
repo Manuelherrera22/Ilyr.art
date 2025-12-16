@@ -24,24 +24,30 @@ export const AuthProvider = ({ children }) => {
     
     const getSession = async () => {
       try {
-        // Timeout más corto para la petición individual
-        const sessionPromise = supabase.auth.getSession();
-        const timeoutPromise = new Promise((_, reject) => 
-          setTimeout(() => reject(new Error('Session request timeout')), 3000)
+        // Timeout más corto para la petición individual (2 segundos)
+        const sessionPromise = supabase.auth.getSession().catch(err => {
+          console.warn('Session promise rejected:', err);
+          return { data: { session: null }, error: err };
+        });
+        
+        const timeoutPromise = new Promise((resolve) => 
+          setTimeout(() => {
+            console.warn('Session request timeout, using null session');
+            resolve({ data: { session: null }, error: { message: 'Timeout' } });
+          }, 2000)
         );
         
-        const { data: { session }, error } = await Promise.race([
-          sessionPromise,
-          timeoutPromise
-        ]).catch(() => ({ data: { session: null }, error: { message: 'Timeout' } }));
+        const result = await Promise.race([sessionPromise, timeoutPromise]);
+        const { data: { session } = {}, error } = result || { data: { session: null }, error: null };
         
-        if (error) {
+        if (error && error.message !== 'Timeout') {
           console.error('Error getting session:', error);
         }
+        
         if (!isResolved) {
           isResolved = true;
           clearTimeout(timeoutId);
-          handleSession(session);
+          handleSession(session || null);
         }
       } catch (error) {
         console.error('Error in getSession:', error);
