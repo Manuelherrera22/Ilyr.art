@@ -91,18 +91,18 @@ const CookieBanner = () => {
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
             className="fixed bottom-0 left-0 right-0 z-[100] bg-gradient-to-r from-[#0B0D12] via-[#0B0D12] to-[#0B0D12] border-t-2 border-primary/50 shadow-2xl"
           >
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+            <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-4 md:py-6">
               {!showSettings ? (
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                  <div className="flex-1 flex items-start gap-3 sm:gap-4">
-                    <div className="flex-shrink-0 mt-1">
-                      <Cookie className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
+                  <div className="flex-1 flex items-start gap-2 sm:gap-3 md:gap-4 min-w-0">
+                    <div className="flex-shrink-0 mt-0.5 sm:mt-1">
+                      <Cookie className="h-5 w-5 sm:h-6 sm:w-6 md:h-8 md:w-8 text-primary" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-base sm:text-lg font-bold text-white mb-1 sm:mb-2">
+                      <h3 className="text-sm sm:text-base md:text-lg font-bold text-white mb-1 sm:mb-2">
                         Utilizamos cookies
                       </h3>
-                      <p className="text-xs sm:text-sm text-white/70 leading-relaxed">
+                      <p className="text-[11px] sm:text-xs md:text-sm text-white/70 leading-relaxed">
                         Utilizamos cookies para mejorar tu experiencia, analizar el tráfico del sitio y personalizar el contenido. 
                         Al hacer clic en "Aceptar todas", aceptas nuestro uso de cookies.{' '}
                         <Link 
@@ -115,75 +115,75 @@ const CookieBanner = () => {
                       </p>
                     </div>
                   </div>
-                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 w-full sm:w-auto">
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-2 md:gap-3 w-full sm:w-auto">
                     <Button
                       variant="outline"
                       size="sm"
                       onClick={() => setShowSettings(true)}
-                      className="w-full sm:w-auto text-xs sm:text-sm border-white/20 text-white hover:bg-white/10"
+                      className="w-full sm:w-auto text-[11px] sm:text-xs md:text-sm border-white/20 text-white hover:bg-white/10 py-2 sm:py-2.5"
                     >
-                      <Settings className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2" />
-                      Personalizar
+                      <Settings className="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 mr-1 sm:mr-1.5 md:mr-2" />
+                      <span className="whitespace-nowrap">Personalizar</span>
                     </Button>
                     <Button
                       variant="outline"
                       size="sm"
                       onClick={handleRejectAll}
-                      className="w-full sm:w-auto text-xs sm:text-sm border-white/20 text-white hover:bg-white/10"
+                      className="w-full sm:w-auto text-[11px] sm:text-xs md:text-sm border-white/20 text-white hover:bg-white/10 py-2 sm:py-2.5"
                     >
-                      Rechazar
+                      <span className="whitespace-nowrap">Rechazar</span>
                     </Button>
                     <Button
                       size="sm"
                       onClick={handleAcceptAll}
-                      className="w-full sm:w-auto text-xs sm:text-sm bg-gradient-to-r from-primary to-secondary text-primary-foreground hover:opacity-90"
+                      className="w-full sm:w-auto text-[11px] sm:text-xs md:text-sm bg-gradient-to-r from-primary to-secondary text-primary-foreground hover:opacity-90 py-2 sm:py-2.5"
                     >
-                      Aceptar todas
+                      <span className="whitespace-nowrap">Aceptar todas</span>
                     </Button>
                   </div>
                 </div>
               ) : (
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
-                      <Settings className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
-                      Preferencias de cookies
+                <div className="space-y-3 sm:space-y-4">
+                  <div className="flex items-center justify-between gap-2">
+                    <h3 className="text-base sm:text-lg md:text-xl font-bold text-white flex items-center gap-1.5 sm:gap-2">
+                      <Settings className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-primary flex-shrink-0" />
+                      <span className="truncate">Preferencias de cookies</span>
                     </h3>
                     <Button
                       variant="ghost"
                       size="icon"
                       onClick={() => setShowSettings(false)}
-                      className="text-white/70 hover:text-white hover:bg-white/10 h-8 w-8 sm:h-9 sm:w-9"
+                      className="text-white/70 hover:text-white hover:bg-white/10 h-7 w-7 sm:h-8 sm:w-8 md:h-9 md:w-9 flex-shrink-0"
                     >
-                      <X className="h-4 w-4 sm:h-5 sm:w-5" />
+                      <X className="h-3.5 w-3.5 sm:h-4 sm:w-4 md:h-5 md:w-5" />
                     </Button>
                   </div>
 
-                  <div className="space-y-4">
+                  <div className="space-y-3 sm:space-y-4">
                     {/* Necessary Cookies - Always On */}
-                    <div className="flex items-start justify-between gap-4 p-3 sm:p-4 bg-white/5 rounded-lg border border-white/10">
-                      <div className="flex-1">
-                        <h4 className="text-sm sm:text-base font-semibold text-white mb-1">
+                    <div className="flex items-start justify-between gap-3 sm:gap-4 p-2.5 sm:p-3 md:p-4 bg-white/5 rounded-lg border border-white/10">
+                      <div className="flex-1 min-w-0">
+                        <h4 className="text-xs sm:text-sm md:text-base font-semibold text-white mb-1">
                           Cookies necesarias
                         </h4>
-                        <p className="text-xs sm:text-sm text-white/60">
+                        <p className="text-[10px] sm:text-xs md:text-sm text-white/60 leading-relaxed">
                           Estas cookies son esenciales para el funcionamiento del sitio web y no se pueden desactivar.
                         </p>
                       </div>
                       <div className="flex-shrink-0">
-                        <div className="relative inline-flex h-6 w-11 items-center rounded-full bg-primary cursor-not-allowed opacity-50">
-                          <span className="inline-block h-4 w-4 translate-x-6 transform rounded-full bg-white transition" />
+                        <div className="relative inline-flex h-5 w-9 sm:h-6 sm:w-11 items-center rounded-full bg-primary cursor-not-allowed opacity-50">
+                          <span className="inline-block h-3.5 w-3.5 sm:h-4 sm:w-4 translate-x-4 sm:translate-x-6 transform rounded-full bg-white transition" />
                         </div>
                       </div>
                     </div>
 
                     {/* Analytics Cookies */}
-                    <div className="flex items-start justify-between gap-4 p-3 sm:p-4 bg-white/5 rounded-lg border border-white/10">
-                      <div className="flex-1">
-                        <h4 className="text-sm sm:text-base font-semibold text-white mb-1">
+                    <div className="flex items-start justify-between gap-3 sm:gap-4 p-2.5 sm:p-3 md:p-4 bg-white/5 rounded-lg border border-white/10">
+                      <div className="flex-1 min-w-0">
+                        <h4 className="text-xs sm:text-sm md:text-base font-semibold text-white mb-1">
                           Cookies de análisis
                         </h4>
-                        <p className="text-xs sm:text-sm text-white/60">
+                        <p className="text-[10px] sm:text-xs md:text-sm text-white/60 leading-relaxed">
                           Nos ayudan a entender cómo los visitantes interactúan con nuestro sitio web recopilando información de forma anónima.
                         </p>
                       </div>
@@ -191,13 +191,13 @@ const CookieBanner = () => {
                         <button
                           type="button"
                           onClick={() => handleTogglePreference('analytics')}
-                          className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-[#0B0D12] ${
+                          className={`relative inline-flex h-5 w-9 sm:h-6 sm:w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 focus:ring-offset-[#0B0D12] ${
                             cookiePreferences.analytics ? 'bg-primary' : 'bg-white/20'
                           }`}
                         >
                           <span
-                            className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                              cookiePreferences.analytics ? 'translate-x-6' : 'translate-x-1'
+                            className={`inline-block h-3.5 w-3.5 sm:h-4 sm:w-4 transform rounded-full bg-white transition-transform ${
+                              cookiePreferences.analytics ? 'translate-x-4 sm:translate-x-6' : 'translate-x-0.5 sm:translate-x-1'
                             }`}
                           />
                         </button>
@@ -205,12 +205,12 @@ const CookieBanner = () => {
                     </div>
 
                     {/* Marketing Cookies */}
-                    <div className="flex items-start justify-between gap-4 p-3 sm:p-4 bg-white/5 rounded-lg border border-white/10">
-                      <div className="flex-1">
-                        <h4 className="text-sm sm:text-base font-semibold text-white mb-1">
+                    <div className="flex items-start justify-between gap-3 sm:gap-4 p-2.5 sm:p-3 md:p-4 bg-white/5 rounded-lg border border-white/10">
+                      <div className="flex-1 min-w-0">
+                        <h4 className="text-xs sm:text-sm md:text-base font-semibold text-white mb-1">
                           Cookies de marketing
                         </h4>
-                        <p className="text-xs sm:text-sm text-white/60">
+                        <p className="text-[10px] sm:text-xs md:text-sm text-white/60 leading-relaxed">
                           Se utilizan para hacer un seguimiento de los visitantes a través de diferentes sitios web con la intención de mostrar anuncios relevantes.
                         </p>
                       </div>
@@ -218,13 +218,13 @@ const CookieBanner = () => {
                         <button
                           type="button"
                           onClick={() => handleTogglePreference('marketing')}
-                          className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-[#0B0D12] ${
+                          className={`relative inline-flex h-5 w-9 sm:h-6 sm:w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1 focus:ring-offset-[#0B0D12] ${
                             cookiePreferences.marketing ? 'bg-primary' : 'bg-white/20'
                           }`}
                         >
                           <span
-                            className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                              cookiePreferences.marketing ? 'translate-x-6' : 'translate-x-1'
+                            className={`inline-block h-3.5 w-3.5 sm:h-4 sm:w-4 transform rounded-full bg-white transition-transform ${
+                              cookiePreferences.marketing ? 'translate-x-4 sm:translate-x-6' : 'translate-x-0.5 sm:translate-x-1'
                             }`}
                           />
                         </button>
@@ -232,21 +232,21 @@ const CookieBanner = () => {
                     </div>
                   </div>
 
-                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-end gap-2 sm:gap-3 pt-2 border-t border-white/10">
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-end gap-2 sm:gap-2 md:gap-3 pt-2 sm:pt-3 border-t border-white/10">
                     <Button
                       variant="outline"
                       size="sm"
                       onClick={() => setShowSettings(false)}
-                      className="w-full sm:w-auto text-xs sm:text-sm border-white/20 text-white hover:bg-white/10"
+                      className="w-full sm:w-auto text-[11px] sm:text-xs md:text-sm border-white/20 text-white hover:bg-white/10 py-2 sm:py-2.5"
                     >
-                      Cancelar
+                      <span className="whitespace-nowrap">Cancelar</span>
                     </Button>
                     <Button
                       size="sm"
                       onClick={handleSavePreferences}
-                      className="w-full sm:w-auto text-xs sm:text-sm bg-gradient-to-r from-primary to-secondary text-primary-foreground hover:opacity-90"
+                      className="w-full sm:w-auto text-[11px] sm:text-xs md:text-sm bg-gradient-to-r from-primary to-secondary text-primary-foreground hover:opacity-90 py-2 sm:py-2.5"
                     >
-                      Guardar preferencias
+                      <span className="whitespace-nowrap">Guardar preferencias</span>
                     </Button>
                   </div>
                 </div>

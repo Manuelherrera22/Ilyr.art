@@ -9,7 +9,7 @@ import { uploadProjectAsset } from '@/services/api/assets';
 import { Upload, X, File, Loader2 } from 'lucide-react';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
 
-const AssetUpload = ({ projectId, onUploadSuccess }) => {
+const AssetUpload = ({ projectId, onUploadSuccess, disabled = false }) => {
   const { user } = useAuth();
   const { toast } = useToast();
   const [file, setFile] = useState(null);
@@ -46,7 +46,8 @@ const AssetUpload = ({ projectId, onUploadSuccess }) => {
 
     setUploading(true);
     try {
-      await uploadProjectAsset(projectId, user.id, file, {
+      // Subir el archivo
+      const result = await uploadProjectAsset(projectId, user.id, file, {
         type: assetType,
         notes,
         is_final: isFinal,
@@ -57,6 +58,25 @@ const AssetUpload = ({ projectId, onUploadSuccess }) => {
         description: 'El archivo se ha subido correctamente',
       });
 
+      // Si onUploadSuccess es una función que espera parámetros específicos (para entregas)
+      if (onUploadSuccess && typeof onUploadSuccess === 'function') {
+        // Verificar si la función espera parámetros contando sus argumentos
+        // Si es para entregas, llamar con los parámetros necesarios
+        try {
+          await onUploadSuccess(result.file_url, assetType, file.size, notes);
+        } catch (callbackError) {
+          // Si falla, puede ser que no espere parámetros, llamar sin ellos
+          if (callbackError.message?.includes('is not a function') || callbackError.message?.includes('undefined')) {
+            onUploadSuccess();
+          } else {
+            throw callbackError;
+          }
+        }
+      } else if (onUploadSuccess) {
+        // Comportamiento original sin parámetros
+        onUploadSuccess();
+      }
+
       // Limpiar formulario
       setFile(null);
       setNotes('');
@@ -66,11 +86,6 @@ const AssetUpload = ({ projectId, onUploadSuccess }) => {
       // Resetear input de archivo
       const fileInput = document.getElementById('asset-file');
       if (fileInput) fileInput.value = '';
-
-      // Notificar al componente padre
-      if (onUploadSuccess) {
-        onUploadSuccess();
-      }
     } catch (error) {
       console.error('Error uploading asset:', error);
       toast({
@@ -104,7 +119,7 @@ const AssetUpload = ({ projectId, onUploadSuccess }) => {
               id="asset-file"
               type="file"
               onChange={handleFileChange}
-              disabled={uploading}
+              disabled={uploading || disabled}
               className="flex-1"
             />
             {file && (
@@ -131,7 +146,7 @@ const AssetUpload = ({ projectId, onUploadSuccess }) => {
             id="asset-type"
             value={assetType}
             onChange={(e) => setAssetType(e.target.value)}
-            disabled={uploading}
+            disabled={uploading || disabled}
             className="w-full px-3 py-2 bg-background border border-border rounded-md text-foreground"
           >
             <option value="draft">Borrador</option>
@@ -147,7 +162,7 @@ const AssetUpload = ({ projectId, onUploadSuccess }) => {
             id="asset-notes"
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
-            disabled={uploading}
+            disabled={uploading || disabled}
             placeholder="Agrega notas sobre esta versión..."
             rows={3}
           />
@@ -159,7 +174,7 @@ const AssetUpload = ({ projectId, onUploadSuccess }) => {
             id="is-final"
             checked={isFinal}
             onChange={(e) => setIsFinal(e.target.checked)}
-            disabled={uploading}
+            disabled={uploading || disabled}
             className="w-4 h-4"
           />
           <Label htmlFor="is-final" className="cursor-pointer">
@@ -169,7 +184,7 @@ const AssetUpload = ({ projectId, onUploadSuccess }) => {
 
         <Button
           onClick={handleUpload}
-          disabled={!file || uploading}
+          disabled={!file || uploading || disabled}
           className="w-full"
         >
           {uploading ? (
