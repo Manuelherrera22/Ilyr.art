@@ -13,6 +13,17 @@ export const ProfileProvider = ({ children }) => {
   const fetchProfile = useCallback(async (user) => {
     if (user) {
       setLoading(true);
+      
+      // Timeout de seguridad: si después de 10 segundos no hay respuesta, resolvemos con perfil por defecto
+      const timeoutId = setTimeout(() => {
+        console.warn('Profile fetch timeout, using default profile');
+        setProfile({
+          full_name: user.email?.split('@')[0] || 'Usuario',
+          profile_type: 'client'
+        });
+        setLoading(false);
+      }, 10000);
+      
       try {
         const { data, error, status } = await supabase
           .from('profiles')
@@ -20,29 +31,39 @@ export const ProfileProvider = ({ children }) => {
           .eq('id', user.id)
           .single();
 
+        clearTimeout(timeoutId);
+
         if (error && status !== 406) {
           console.error('Error fetching profile:', error);
           // Si hay error pero no es 406, intentamos crear perfil por defecto
           if (status === 404 || status === 0) {
             console.log('No profile found, creating default profile...');
-            const { error: insertError } = await supabase
-              .from('profiles')
-              .insert([
-                {
-                  id: user.id,
+            try {
+              const { error: insertError } = await supabase
+                .from('profiles')
+                .insert([
+                  {
+                    id: user.id,
+                    full_name: user.email?.split('@')[0] || 'Usuario',
+                    profile_type: 'client'
+                  }
+                ]);
+
+              if (insertError) {
+                console.error('Error creating profile:', insertError);
+                // Aún así establecemos un perfil mínimo para que la app funcione
+                setProfile({
                   full_name: user.email?.split('@')[0] || 'Usuario',
                   profile_type: 'client'
-                }
-              ]);
-
-            if (insertError) {
-              console.error('Error creating profile:', insertError);
-              // Aún así establecemos un perfil mínimo para que la app funcione
-              setProfile({
-                full_name: user.email?.split('@')[0] || 'Usuario',
-                profile_type: 'client'
-              });
-            } else {
+                });
+              } else {
+                setProfile({
+                  full_name: user.email?.split('@')[0] || 'Usuario',
+                  profile_type: 'client'
+                });
+              }
+            } catch (insertErr) {
+              console.error('Error in profile creation:', insertErr);
               setProfile({
                 full_name: user.email?.split('@')[0] || 'Usuario',
                 profile_type: 'client'
@@ -59,25 +80,33 @@ export const ProfileProvider = ({ children }) => {
           setProfile(data);
         } else {
           // Si no hay data ni error, creamos perfil por defecto
-          const { error: insertError } = await supabase
-            .from('profiles')
-            .insert([
-              {
-                id: user.id,
+          try {
+            const { error: insertError } = await supabase
+              .from('profiles')
+              .insert([
+                {
+                  id: user.id,
+                  full_name: user.email?.split('@')[0] || 'Usuario',
+                  profile_type: 'client'
+                }
+              ]);
+
+            if (insertError) {
+              if (process.env.NODE_ENV === 'development') {
+                console.error('Error creating profile:', insertError);
+              }
+              setProfile({
                 full_name: user.email?.split('@')[0] || 'Usuario',
                 profile_type: 'client'
-              }
-            ]);
-
-          if (insertError) {
-            if (process.env.NODE_ENV === 'development') {
-              console.error('Error creating profile:', insertError);
+              });
+            } else {
+              setProfile({
+                full_name: user.email?.split('@')[0] || 'Usuario',
+                profile_type: 'client'
+              });
             }
-            setProfile({
-              full_name: user.email?.split('@')[0] || 'Usuario',
-              profile_type: 'client'
-            });
-          } else {
+          } catch (insertErr) {
+            console.error('Error in profile creation:', insertErr);
             setProfile({
               full_name: user.email?.split('@')[0] || 'Usuario',
               profile_type: 'client'
@@ -85,15 +114,15 @@ export const ProfileProvider = ({ children }) => {
           }
         }
       } catch (error) {
-        if (process.env.NODE_ENV === 'development') {
-          console.error('Error in fetchProfile:', error);
-        }
+        clearTimeout(timeoutId);
+        console.error('Error in fetchProfile:', error);
         // En caso de error, establecemos un perfil mínimo para que la app no se quede colgada
         setProfile({
           full_name: user?.email?.split('@')[0] || 'Usuario',
           profile_type: 'client'
         });
       } finally {
+        clearTimeout(timeoutId);
         setLoading(false);
       }
     } else {

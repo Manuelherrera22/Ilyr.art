@@ -20,10 +20,21 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     let timeoutId;
     let isResolved = false;
+    let subscription = null;
     
     const getSession = async () => {
       try {
-        const { data: { session }, error } = await supabase.auth.getSession();
+        // Timeout más corto para la petición individual
+        const sessionPromise = supabase.auth.getSession();
+        const timeoutPromise = new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('Session request timeout')), 3000)
+        );
+        
+        const { data: { session }, error } = await Promise.race([
+          sessionPromise,
+          timeoutPromise
+        ]).catch(() => ({ data: { session: null }, error: { message: 'Timeout' } }));
+        
         if (error) {
           console.error('Error getting session:', error);
         }
@@ -54,19 +65,32 @@ export const AuthProvider = ({ children }) => {
       }
     }, 5000);
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (_event, session) => {
-        if (!isResolved) {
-          isResolved = true;
-          clearTimeout(timeoutId);
+    try {
+      const { data } = supabase.auth.onAuthStateChange(
+        async (_event, session) => {
+          if (!isResolved) {
+            isResolved = true;
+            clearTimeout(timeoutId);
+          }
+          handleSession(session);
         }
-        handleSession(session);
+      );
+      subscription = data.subscription;
+    } catch (error) {
+      console.error('Error setting up auth state listener:', error);
+      // Si falla el listener, aún resolvemos
+      if (!isResolved) {
+        isResolved = true;
+        clearTimeout(timeoutId);
+        handleSession(null);
       }
-    );
+    }
 
     return () => {
       clearTimeout(timeoutId);
-      subscription.unsubscribe();
+      if (subscription) {
+        subscription.unsubscribe();
+      }
     };
   }, [handleSession]);
 
