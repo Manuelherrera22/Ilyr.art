@@ -24,13 +24,13 @@ import {
   Activity,
   Calendar,
   BarChart3,
-  Sparkles
+  Sparkles,
+  Brain
 } from 'lucide-react';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import StatsChart, { LineChart, DonutChart } from './StatsChart';
 import TimelineView from './TimelineView';
 import { Link } from 'react-router-dom';
-import { Brain, Calendar, BarChart3 } from 'lucide-react';
 
 const CreativeDashboard = () => {
   const { user } = useAuth();
