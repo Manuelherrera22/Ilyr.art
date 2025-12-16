@@ -693,7 +693,7 @@ const JobDetailView = () => {
           />
         </TabsContent>
       </Tabs>
-    </div>
+    </motion.div>
   );
 };
 
