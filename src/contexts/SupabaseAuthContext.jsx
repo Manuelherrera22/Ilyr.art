@@ -18,6 +18,24 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
+    // MODO TEST: Resolver inmediatamente sin verificar sesión
+    const TEST_MODE = true; // Cambiar a false para habilitar autenticación
+    
+    if (TEST_MODE) {
+      // En modo test, simular usuario admin para testing
+      const mockUser = {
+        id: 'test-admin-id',
+        email: 'admin@ilyrart.com',
+        user_metadata: {}
+      };
+      const mockSession = {
+        user: mockUser,
+        access_token: 'test-token'
+      };
+      handleSession(mockSession);
+      return;
+    }
+
     let timeoutId;
     let isResolved = false;
     let subscription = null;

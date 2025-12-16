@@ -132,6 +132,20 @@ export const ProfileProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
+    // MODO TEST: Simular perfil admin para testing
+    const TEST_MODE = true; // Cambiar a false para habilitar verificación real
+    
+    if (TEST_MODE) {
+      // En modo test, simular perfil admin
+      setProfile({
+        full_name: 'Administrador Ilyrart',
+        profile_type: 'admin',
+        client_account_id: null
+      });
+      setLoading(false);
+      return;
+    }
+
     // Si no hay usuario, resolvemos inmediatamente SIN delay
     if (!user) {
       setProfile(null);

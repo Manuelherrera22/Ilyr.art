@@ -11,6 +11,14 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
   const { role, loadingProfile } = useProfile();
   const [roleTimeout, setRoleTimeout] = React.useState(false);
 
+  // MODO TEST: Permitir acceso sin verificación de sesión
+  const TEST_MODE = true; // Cambiar a false para habilitar autenticación
+  
+  if (TEST_MODE) {
+    // En modo test, permitir acceso directo sin verificar sesión
+    return children;
+  }
+
   // Si no hay sesión, redirigir inmediatamente sin esperar nada más
   if (!loading && !isLoggedIn) {
     return <Navigate to="/login" state={{ from: location }} replace />;
