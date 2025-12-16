@@ -14,7 +14,7 @@ export const ProfileProvider = ({ children }) => {
     if (user) {
       setLoading(true);
       
-      // Timeout de seguridad: si después de 10 segundos no hay respuesta, resolvemos con perfil por defecto
+      // Timeout de seguridad: si después de 5 segundos no hay respuesta, resolvemos con perfil por defecto
       const timeoutId = setTimeout(() => {
         console.warn('Profile fetch timeout, using default profile');
         setProfile({
@@ -22,7 +22,7 @@ export const ProfileProvider = ({ children }) => {
           profile_type: 'client'
         });
         setLoading(false);
-      }, 10000);
+      }, 5000);
       
       try {
         const { data, error, status } = await supabase
@@ -132,11 +132,14 @@ export const ProfileProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    // Si no hay usuario, resolvemos inmediatamente
+    // Si no hay usuario, resolvemos inmediatamente (sin delay)
     if (!user) {
-      setProfile(null);
-      setLoading(false);
-      return;
+      // Usar setTimeout(0) para asegurar que se ejecute en el siguiente tick
+      const timer = setTimeout(() => {
+        setProfile(null);
+        setLoading(false);
+      }, 0);
+      return () => clearTimeout(timer);
     }
 
     fetchProfile(user);

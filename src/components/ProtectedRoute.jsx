@@ -19,7 +19,26 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
   }
 
   if (allowedRoles && allowedRoles.length > 0) {
+    // Si no hay role después de 2 segundos, redirigir a login
     if (!role) {
+      // Timeout de seguridad: si no hay role en 2 segundos, asumir que no está autenticado
+      const [shouldRedirect, setShouldRedirect] = React.useState(false);
+      
+      React.useEffect(() => {
+        const timer = setTimeout(() => {
+          if (!role) {
+            console.warn('Role timeout in ProtectedRoute, redirecting to login');
+            setShouldRedirect(true);
+          }
+        }, 2000);
+        
+        return () => clearTimeout(timer);
+      }, [role]);
+      
+      if (shouldRedirect) {
+        return <Navigate to="/login" state={{ from: location }} replace />;
+      }
+      
       return <LoadingSpinner fullScreen />;
     }
 

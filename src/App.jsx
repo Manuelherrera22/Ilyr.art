@@ -28,8 +28,21 @@ const AdminPortal = React.lazy(() => import('@/pages/portals/admin/AdminPortal')
 const AppRoutes = () => {
   const { loading: authLoading } = useAuth();
   const { loadingProfile } = useProfile();
+  const [forceLoad, setForceLoad] = React.useState(false);
 
-  if (authLoading || loadingProfile) {
+  // Timeout de seguridad global: si después de 6 segundos aún está cargando, forzar carga
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      if (authLoading || loadingProfile) {
+        console.warn('Global loading timeout, forcing app to load');
+        setForceLoad(true);
+      }
+    }, 6000);
+
+    return () => clearTimeout(timer);
+  }, [authLoading, loadingProfile]);
+
+  if ((authLoading || loadingProfile) && !forceLoad) {
     return <LoadingSpinner fullScreen />;
   }
 

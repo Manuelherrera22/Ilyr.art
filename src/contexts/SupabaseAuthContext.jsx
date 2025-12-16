@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
     
     const getSession = async () => {
       try {
-        // Timeout más corto para la petición individual (2 segundos)
+        // Timeout más corto para la petición individual (1 segundo)
         const sessionPromise = supabase.auth.getSession().catch(err => {
           console.warn('Session promise rejected:', err);
           return { data: { session: null }, error: err };
@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
           setTimeout(() => {
             console.warn('Session request timeout, using null session');
             resolve({ data: { session: null }, error: { message: 'Timeout' } });
-          }, 2000)
+          }, 1000)
         );
         
         const result = await Promise.race([sessionPromise, timeoutPromise]);
@@ -62,14 +62,14 @@ export const AuthProvider = ({ children }) => {
 
     getSession();
 
-    // Timeout de seguridad: si después de 5 segundos no hay respuesta, resolvemos como no autenticado
+    // Timeout de seguridad: si después de 3 segundos no hay respuesta, resolvemos como no autenticado
     timeoutId = setTimeout(() => {
       if (!isResolved) {
         isResolved = true;
         console.warn('Session check timeout, resolving as unauthenticated');
         handleSession(null);
       }
-    }, 5000);
+    }, 3000);
 
     try {
       const { data } = supabase.auth.onAuthStateChange(
