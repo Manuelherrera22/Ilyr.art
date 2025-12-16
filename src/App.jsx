@@ -30,14 +30,14 @@ const AppRoutes = () => {
   const { loadingProfile } = useProfile();
   const [forceLoad, setForceLoad] = React.useState(false);
 
-  // Timeout de seguridad global: si después de 6 segundos aún está cargando, forzar carga
+  // Timeout de seguridad global: si después de 4 segundos aún está cargando, forzar carga
   React.useEffect(() => {
     const timer = setTimeout(() => {
       if (authLoading || loadingProfile) {
         console.warn('Global loading timeout, forcing app to load');
         setForceLoad(true);
       }
-    }, 6000);
+    }, 4000);
 
     return () => clearTimeout(timer);
   }, [authLoading, loadingProfile]);

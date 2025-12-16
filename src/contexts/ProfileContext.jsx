@@ -132,14 +132,11 @@ export const ProfileProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    // Si no hay usuario, resolvemos inmediatamente (sin delay)
+    // Si no hay usuario, resolvemos inmediatamente SIN delay
     if (!user) {
-      // Usar setTimeout(0) para asegurar que se ejecute en el siguiente tick
-      const timer = setTimeout(() => {
-        setProfile(null);
-        setLoading(false);
-      }, 0);
-      return () => clearTimeout(timer);
+      setProfile(null);
+      setLoading(false);
+      return;
     }
 
     fetchProfile(user);
