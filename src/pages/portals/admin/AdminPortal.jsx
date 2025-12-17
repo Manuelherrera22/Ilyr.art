@@ -8,6 +8,7 @@ import UsersManagement from './components/UsersManagement';
 import ServicesManagement from './components/ServicesManagement';
 import ProjectsManagement from './components/ProjectsManagement';
 import ProjectsTracking from './components/ProjectsTracking';
+import ProjectsPublishing from './components/ProjectsPublishing';
 import NotificationsBell from '@/components/NotificationsBell';
 
 const AdminOverview = () => (
@@ -151,11 +152,11 @@ const AdminPortal = () => {
             </Button>
             <Button
               asChild
-              variant={location.pathname.includes('/projects') && !location.pathname.includes('/tracking') ? 'default' : 'outline'}
+              variant={location.pathname.includes('/projects') && !location.pathname.includes('/tracking') && !location.pathname.includes('/publishing') ? 'default' : 'outline'}
               size="sm"
               className={`
                 border-white/20 text-white text-xs sm:text-sm flex-1 sm:flex-initial
-                ${location.pathname.includes('/projects') && !location.pathname.includes('/tracking')
+                ${location.pathname.includes('/projects') && !location.pathname.includes('/tracking') && !location.pathname.includes('/publishing')
                   ? 'bg-primary/20 border-primary/50 hover:bg-primary/30' 
                   : 'hover:bg-white/10'
                 }
@@ -163,6 +164,21 @@ const AdminPortal = () => {
               `}
             >
               <Link to="projects">Proyectos</Link>
+            </Button>
+            <Button
+              asChild
+              variant={location.pathname.includes('/publishing') ? 'default' : 'outline'}
+              size="sm"
+              className={`
+                border-white/20 text-white text-xs sm:text-sm flex-1 sm:flex-initial
+                ${location.pathname.includes('/publishing')
+                  ? 'bg-primary/20 border-primary/50 hover:bg-primary/30' 
+                  : 'hover:bg-white/10'
+                }
+                transition-all duration-200
+              `}
+            >
+              <Link to="publishing">Publicación</Link>
             </Button>
             <Button
               asChild
@@ -192,6 +208,7 @@ const AdminPortal = () => {
           <Route path="users" element={<UsersManagement />} />
           <Route path="services" element={<ServicesManagement />} />
           <Route path="projects" element={<ProjectsManagement />} />
+          <Route path="publishing" element={<ProjectsPublishing />} />
           <Route path="tracking" element={<ProjectsTracking />} />
           <Route path="*" element={<Navigate to="." replace />} />
         </Routes>

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { getSystemMetrics } from '@/services/api/admin';
 import LoadingSpinner from '@/components/LoadingSpinner';
-import { TrendingUp, FolderKanban, Users, Building2, FileText, Activity, Zap, ArrowUpRight, ArrowDownRight } from 'lucide-react';
+import { TrendingUp, FolderKanban, Users, Building2, FileText, Activity, Zap, ArrowUpRight, ArrowDownRight, BarChart3 } from 'lucide-react';
 
 const SystemMetrics = () => {
   const [metrics, setMetrics] = useState(null);
@@ -218,12 +218,48 @@ const SystemMetrics = () => {
         })}
       </motion.div>
 
-      {/* Sección de actividad reciente */}
+      {/* Gráfico de distribución */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
+        className="grid gap-6 lg:grid-cols-2"
       >
+        <Card className="bg-gradient-to-br from-white/5 via-white/5 to-transparent border-white/10 backdrop-blur-sm">
+          <CardHeader>
+            <CardTitle className="text-xl font-semibold text-white flex items-center gap-2">
+              <BarChart3 className="w-5 h-5 text-primary" />
+              Distribución de Proyectos
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {[
+                { label: 'Activos', value: metrics.activeProjects || 0, total: metrics.totalProjects || 0, color: 'from-blue-500 to-blue-600' },
+                { label: 'Completados', value: metrics.totalProjects - (metrics.activeProjects || 0), total: metrics.totalProjects || 0, color: 'from-green-500 to-green-600' },
+              ].map((item, index) => {
+                const percentage = item.total > 0 ? (item.value / item.total) * 100 : 0;
+                return (
+                  <div key={index}>
+                    <div className="flex items-center justify-between text-sm text-white/80 mb-2">
+                      <span>{item.label}</span>
+                      <span className="font-semibold">{item.value} ({percentage.toFixed(1)}%)</span>
+                    </div>
+                    <div className="w-full bg-white/10 rounded-full h-3">
+                      <motion.div
+                        className={`bg-gradient-to-r ${item.color} h-3 rounded-full`}
+                        initial={{ width: 0 }}
+                        animate={{ width: `${percentage}%` }}
+                        transition={{ duration: 1, delay: 0.4 + index * 0.1 }}
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </CardContent>
+        </Card>
+
         <Card className="bg-gradient-to-br from-white/5 via-white/5 to-transparent border-white/10 backdrop-blur-sm">
           <CardHeader>
             <CardTitle className="text-xl font-semibold text-white flex items-center gap-2">
@@ -233,19 +269,75 @@ const SystemMetrics = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              <div className="flex items-center justify-between p-3 rounded-lg bg-white/5 border border-white/10">
+              <motion.div
+                className="flex items-center justify-between p-3 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
+                whileHover={{ scale: 1.02 }}
+              >
                 <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                  <motion.div
+                    className="w-2 h-2 rounded-full bg-green-400"
+                    animate={{ scale: [1, 1.2, 1], opacity: [1, 0.7, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  />
                   <span className="text-white/80 text-sm">Sistema operativo normalmente</span>
                 </div>
                 <span className="text-white/50 text-xs">Ahora</span>
-              </div>
-              <div className="flex items-center justify-between p-3 rounded-lg bg-white/5 border border-white/10">
+              </motion.div>
+              <motion.div
+                className="flex items-center justify-between p-3 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
+                whileHover={{ scale: 1.02 }}
+              >
                 <div className="flex items-center gap-3">
                   <div className="w-2 h-2 rounded-full bg-blue-400" />
                   <span className="text-white/80 text-sm">Última actualización de métricas</span>
                 </div>
                 <span className="text-white/50 text-xs">Hace 2 min</span>
+              </motion.div>
+              <motion.div
+                className="flex items-center justify-between p-3 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
+                whileHover={{ scale: 1.02 }}
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-2 h-2 rounded-full bg-purple-400" />
+                  <span className="text-white/80 text-sm">Base de datos sincronizada</span>
+                </div>
+                <span className="text-white/50 text-xs">Hace 5 min</span>
+              </motion.div>
+            </div>
+          </CardContent>
+        </Card>
+      </motion.div>
+
+      {/* Resumen rápido */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4 }}
+      >
+        <Card className="bg-gradient-to-br from-primary/10 via-secondary/10 to-transparent border-primary/30 backdrop-blur-sm">
+          <CardHeader>
+            <CardTitle className="text-xl font-semibold text-white flex items-center gap-2">
+              <TrendingUp className="w-5 h-5 text-primary" />
+              Resumen Ejecutivo
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="text-center p-4 rounded-lg bg-white/5 border border-white/10">
+                <p className="text-2xl font-bold text-white mb-1">{metrics.totalProjects || 0}</p>
+                <p className="text-white/60 text-xs">Proyectos Totales</p>
+              </div>
+              <div className="text-center p-4 rounded-lg bg-white/5 border border-white/10">
+                <p className="text-2xl font-bold text-white mb-1">{metrics.totalUsers || 0}</p>
+                <p className="text-white/60 text-xs">Usuarios Activos</p>
+              </div>
+              <div className="text-center p-4 rounded-lg bg-white/5 border border-white/10">
+                <p className="text-2xl font-bold text-white mb-1">{metrics.totalClientAccounts || 0}</p>
+                <p className="text-white/60 text-xs">Cuentas Cliente</p>
+              </div>
+              <div className="text-center p-4 rounded-lg bg-white/5 border border-white/10">
+                <p className="text-2xl font-bold text-white mb-1">{metrics.totalBriefs || 0}</p>
+                <p className="text-white/60 text-xs">Briefs Recibidos</p>
               </div>
             </div>
           </CardContent>
