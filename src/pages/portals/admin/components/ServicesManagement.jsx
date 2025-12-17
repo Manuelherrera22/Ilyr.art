@@ -435,60 +435,58 @@ const ServicesManagement = () => {
           <p className="text-white/60">No se encontraron paquetes</p>
         </motion.div>
       )}
-            <CardHeader>
-              <div className="flex items-start justify-between">
-                <div className="flex items-center gap-3">
-                  <Package className="w-5 h-5 text-foreground/70" />
-                  <CardTitle className="text-lg">{pkg.name}</CardTitle>
-                </div>
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {pkg.description && (
-                <CardDescription>{pkg.description}</CardDescription>
-              )}
-              {pkg.from_price && (
-                <div className="flex items-center gap-2 text-lg font-semibold text-foreground">
-                  <DollarSign className="w-5 h-5" />
-                  <span>Desde ${parseFloat(pkg.from_price).toLocaleString()}</span>
-                </div>
-              )}
-              {pkg.deliverables && pkg.deliverables.length > 0 && (
-                <div>
-                  <p className="text-sm font-semibold text-foreground mb-2">Entregables:</p>
-                  <div className="flex flex-wrap gap-2">
-                    {pkg.deliverables.map((deliverable, idx) => (
-                      <Badge key={idx} variant="outline" className="text-xs">
-                        {deliverable}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-              )}
-              <div className="flex gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="flex-1"
-                  onClick={() => handleOpenDialog(pkg)}
-                >
-                  <Edit className="w-4 h-4 mr-2" />
-                  Editar
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => handleDelete(pkg.id)}
-                  className="text-destructive hover:text-destructive"
-                >
-                  <Trash2 className="w-4 h-4" />
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
 
+      {/* Dialog para crear/editar paquete */}
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <DialogContent className="bg-background border-border max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>
+              {editingPackage ? 'Editar Paquete' : 'Nuevo Paquete de Servicio'}
+            </DialogTitle>
+            <DialogDescription>
+              {editingPackage ? 'Actualiza la información del paquete' : 'Crea un nuevo paquete de servicio'}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="name">Nombre del Paquete</Label>
+              <Input
+                id="name"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                placeholder="Ej: Paquete Básico"
+                className="bg-background border-border text-foreground"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="description">Descripción</Label>
+              <Textarea
+                id="description"
+                value={formData.description}
+                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                placeholder="Describe los servicios incluidos..."
+                rows={4}
+                className="bg-background border-border text-foreground"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="from_price">Precio Desde</Label>
+              <Input
+                id="from_price"
+                type="number"
+                value={formData.from_price}
+                onChange={(e) => setFormData({ ...formData, from_price: e.target.value })}
+                placeholder="0.00"
+                step="0.01"
+                className="bg-background border-border text-foreground"
+              />
+            </div>
+            <Button onClick={handleSubmit} className="w-full">
+              {editingPackage ? 'Actualizar' : 'Crear'} Paquete
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </motion.div>
   );
 };
