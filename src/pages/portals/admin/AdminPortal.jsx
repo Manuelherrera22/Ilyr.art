@@ -6,6 +6,7 @@ import SystemMetrics from './components/SystemMetrics';
 import AccountsManagement from './components/AccountsManagement';
 import UsersManagement from './components/UsersManagement';
 import ServicesManagement from './components/ServicesManagement';
+import ProjectsManagement from './components/ProjectsManagement';
 import NotificationsBell from '@/components/NotificationsBell';
 
 const AdminOverview = () => (
@@ -147,6 +148,21 @@ const AdminPortal = () => {
             >
               <Link to="services">Servicios</Link>
             </Button>
+            <Button
+              asChild
+              variant={location.pathname.includes('/projects') ? 'default' : 'outline'}
+              size="sm"
+              className={`
+                border-white/20 text-white text-xs sm:text-sm flex-1 sm:flex-initial
+                ${location.pathname.includes('/projects')
+                  ? 'bg-primary/20 border-primary/50 hover:bg-primary/30' 
+                  : 'hover:bg-white/10'
+                }
+                transition-all duration-200
+              `}
+            >
+              <Link to="projects">Proyectos</Link>
+            </Button>
             <div className="flex-shrink-0">
               <NotificationsBell />
             </div>
@@ -159,6 +175,7 @@ const AdminPortal = () => {
           <Route path="accounts" element={<AccountsManagement />} />
           <Route path="users" element={<UsersManagement />} />
           <Route path="services" element={<ServicesManagement />} />
+          <Route path="projects" element={<ProjectsManagement />} />
           <Route path="*" element={<Navigate to="." replace />} />
         </Routes>
       </main>
