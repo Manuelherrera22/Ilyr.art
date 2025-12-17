@@ -399,7 +399,7 @@ const UsersManagement = () => {
           </div>
         </DialogContent>
       </Dialog>
-    </div>
+    </motion.div>
   );
 };
 
