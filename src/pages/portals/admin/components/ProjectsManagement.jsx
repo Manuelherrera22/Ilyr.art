@@ -24,6 +24,10 @@ import {
   XCircle,
   PlayCircle,
   PauseCircle,
+  ExternalLink,
+  Download,
+  Share2,
+  Settings,
 } from 'lucide-react';
 import {
   Dialog,
@@ -434,40 +438,80 @@ const ProjectsManagement = () => {
                     </DropdownMenu>
                   </div>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex items-center gap-2 text-sm text-white/70">
-                    <Users className="w-4 h-4" />
-                    <span>{project.client_account?.company_name || 'Sin cliente'}</span>
-                  </div>
-                  
-                  {project.progress !== undefined && (
-                    <div>
-                      <div className="flex items-center justify-between text-xs text-white/60 mb-1">
-                        <span>Progreso</span>
-                        <span>{project.progress}%</span>
-                      </div>
-                      <div className="w-full bg-white/10 rounded-full h-2">
-                        <motion.div
-                          className="bg-gradient-to-r from-primary to-secondary h-2 rounded-full"
-                          initial={{ width: 0 }}
-                          animate={{ width: `${project.progress}%` }}
-                          transition={{ duration: 1, delay: 0.3 }}
-                        />
-                      </div>
+                  <CardContent className="space-y-4">
+                    <div className="flex items-center gap-2 text-sm text-white/70">
+                      <Users className="w-4 h-4" />
+                      <span className="truncate">{project.client_account?.company_name || 'Sin cliente'}</span>
                     </div>
-                  )}
+                    
+                    {project.progress !== undefined && (
+                      <div>
+                        <div className="flex items-center justify-between text-xs text-white/60 mb-1">
+                          <span>Progreso</span>
+                          <span className="font-semibold">{project.progress}%</span>
+                        </div>
+                        <div className="w-full bg-white/10 rounded-full h-2.5 overflow-hidden">
+                          <motion.div
+                            className="bg-gradient-to-r from-primary via-secondary to-primary h-2.5 rounded-full relative"
+                            initial={{ width: 0 }}
+                            animate={{ width: `${project.progress}%` }}
+                            transition={{ duration: 1, delay: 0.3 }}
+                          >
+                            <motion.div
+                              className="absolute inset-0 bg-white/20"
+                              animate={{ x: ['-100%', '100%'] }}
+                              transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+                            />
+                          </motion.div>
+                        </div>
+                      </div>
+                    )}
 
-                  <div className="flex items-center justify-between text-xs text-white/50">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="w-3 h-3" />
-                      {format(new Date(project.created_at), 'dd MMM yyyy', { locale: currentLocale })}
+                    <div className="flex items-center justify-between text-xs text-white/50">
+                      <div className="flex items-center gap-1">
+                        <Calendar className="w-3 h-3" />
+                        {format(new Date(project.created_at), 'dd MMM yyyy', { locale: currentLocale })}
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <span className="flex items-center gap-1">
+                          <CheckCircle2 className="w-3 h-3" />
+                          {project.milestones_count || 0}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <Users className="w-3 h-3" />
+                          {project.assignments_count || 0}
+                        </span>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <span>{project.milestones_count || 0} hitos</span>
-                      <span>{project.assignments_count || 0} asignados</span>
+
+                    {/* Acciones rápidas */}
+                    <div className="flex gap-2 pt-2 border-t border-white/10">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="flex-1 text-white/70 hover:text-white hover:bg-white/10 text-xs"
+                        onClick={() => handleOpenDialog(project)}
+                      >
+                        <Edit className="w-3 h-3 mr-1" />
+                        Editar
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="flex-1 text-white/70 hover:text-white hover:bg-white/10 text-xs"
+                      >
+                        <ExternalLink className="w-3 h-3 mr-1" />
+                        Ver
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="text-white/70 hover:text-white hover:bg-white/10"
+                      >
+                        <Share2 className="w-3 h-3" />
+                      </Button>
                     </div>
-                  </div>
-                </CardContent>
+                  </CardContent>
               </Card>
             </motion.div>
           ))}

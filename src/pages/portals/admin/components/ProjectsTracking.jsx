@@ -379,24 +379,40 @@ const ProjectsTracking = () => {
       >
         <Card className="bg-gradient-to-br from-white/5 via-white/5 to-transparent border-white/10 backdrop-blur-sm">
           <CardHeader>
-            <CardTitle className="text-xl font-semibold text-white flex items-center gap-2">
-              <Activity className="w-5 h-5 text-primary" />
-              Actividad Reciente
-            </CardTitle>
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-xl font-semibold text-white flex items-center gap-2">
+                <Activity className="w-5 h-5 text-primary" />
+                Actividad Reciente
+              </CardTitle>
+              <Button variant="ghost" size="sm" className="text-white/50 hover:text-white">
+                Ver todas
+              </Button>
+            </div>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {trackingData.recentActivity.map((activity) => (
-                <div
+              {trackingData.recentActivity.map((activity, index) => (
+                <motion.div
                   key={activity.id}
-                  className="flex items-start gap-3 p-3 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
+                  className="flex items-start gap-3 p-3 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-colors cursor-pointer"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.5 + index * 0.1 }}
+                  whileHover={{ scale: 1.01, x: 4 }}
                 >
-                  <div className="p-2 rounded-lg bg-primary/20 border border-primary/30">
+                  <motion.div
+                    className="p-2 rounded-lg bg-primary/20 border border-primary/30"
+                    whileHover={{ rotate: 360 }}
+                    transition={{ duration: 0.5 }}
+                  >
                     <Activity className="w-4 h-4 text-primary" />
-                  </div>
+                  </motion.div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-white text-sm">{activity.message}</p>
+                    <p className="text-white text-sm font-medium">{activity.message}</p>
                     <div className="flex items-center gap-2 mt-1">
+                      <Badge variant="outline" className="text-xs border-white/20 text-white/60">
+                        {activity.type}
+                      </Badge>
                       <span className="text-white/60 text-xs">{activity.project}</span>
                       <span className="text-white/40 text-xs">•</span>
                       <span className="text-white/50 text-xs">
@@ -404,8 +420,51 @@ const ProjectsTracking = () => {
                       </span>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
+            </div>
+          </CardContent>
+        </Card>
+      </motion.div>
+
+      {/* Gráfico de tendencias */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5 }}
+      >
+        <Card className="bg-gradient-to-br from-white/5 via-white/5 to-transparent border-white/10 backdrop-blur-sm">
+          <CardHeader>
+            <CardTitle className="text-xl font-semibold text-white flex items-center gap-2">
+              <TrendingUp className="w-5 h-5 text-primary" />
+              Tendencias del Período
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-6">
+              {[
+                { label: 'Proyectos Completados', value: 8, max: 24, color: 'from-green-500 to-green-600' },
+                { label: 'Nuevos Proyectos', value: 5, max: 24, color: 'from-blue-500 to-blue-600' },
+                { label: 'Hitos Alcanzados', value: 32, max: 40, color: 'from-purple-500 to-purple-600' },
+              ].map((item, index) => {
+                const percentage = (item.value / item.max) * 100;
+                return (
+                  <div key={index}>
+                    <div className="flex items-center justify-between text-sm text-white/80 mb-2">
+                      <span>{item.label}</span>
+                      <span className="font-semibold">{item.value} / {item.max}</span>
+                    </div>
+                    <div className="w-full bg-white/10 rounded-full h-3">
+                      <motion.div
+                        className={`bg-gradient-to-r ${item.color} h-3 rounded-full`}
+                        initial={{ width: 0 }}
+                        animate={{ width: `${percentage}%` }}
+                        transition={{ duration: 1, delay: 0.6 + index * 0.1 }}
+                      />
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </CardContent>
         </Card>
